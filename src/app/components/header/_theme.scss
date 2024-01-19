@@ -1,0 +1,24 @@
+@mixin header($theme) {
+
+  .app-header {
+
+    .header__link {
+
+      color: map-get($theme, 'inactive');
+
+      &:hover {
+
+        color: map-get($theme, 'color');
+
+        &::before {
+          background: map-get($theme, 'primary');
+        }
+
+      }
+    }
+
+    .aside__link {
+      color: map-get($theme, 'color');
+    }
+  }
+}
