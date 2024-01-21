@@ -1,0 +1,46 @@
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+
+      <div class="relative">
+
+        <swiper-container class="swiper-item-catalog-gallery" appSwiper #appSwiper [config]="swiperConfig" (slideChange)="handleSlideChange($event)">
+          @for (image of images; track image) {
+            <swiper-slide appSwiperSlide>
+              <div class="height-100" [ngStyle]="{
+              background: 'url(' + image +') no-repeat top center / contain',
+              borderRadius: '16px'
+            }"></div>
+            </swiper-slide>
+          }
+        </swiper-container>
+
+        @if (images.length && isOnPhone()) {
+          <div class="swiper-button-prev" [class.swiper-button-disabled]="activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
+            <svg appSvg [src]="'/assets/images/icon-previous.svg'"></svg>
+          </div>
+
+          <div class="swiper-button-next" [class.swiper-button-disabled]="activeIndex() === images.length - 1" (click)="appSwiper.swiper.slideNext()">
+            <svg appSvg [src]="'/assets/images/icon-next.svg'"></svg>
+          </div>
+        }
+
+      </div>
+
+      <swiper-container appSwiper #appSwiperThumbs [config]="swiperThumbsConfig" [hidden]="isOnPhone()">
+        @for (image of images; track image; let i = $index) {
+          <swiper-slide appSwiperSlide class="swiper-item-thumb__picture" [class.swiper-item-thumb__picture--active]="appSwiper.swiper.activeIndex === i" (click)="appSwiper.swiper.slideTo(i);">
+            <div class="height-100" [ngStyle]="{
+              background: 'url(' + image +') no-repeat top center / contain',
+              borderRadius: '6px'
+             }"></div>
+          </swiper-slide>
+        }
+      </swiper-container>
+
+    </div>
+    <div class="mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+
+    </div>
+  </div>
+</div>

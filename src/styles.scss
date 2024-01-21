@@ -173,6 +173,10 @@ hr {
   position: fixed;
 }
 
+.relative {
+  position: relative;
+}
+
 .width-px-250 {
   width: 250px;
 }
@@ -227,6 +231,81 @@ svg {
   max-width: 1110px;
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8%;
+  height: 8%;
+  z-index: 1;
+  border-radius: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 2%;
+
+  svg {
+    width: 25%;
+  }
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.swiper-item-thumb__picture {
+
+  border: solid 2px transparent;
+  border-radius: 8px;
+
+  &--active {
+
+    border: solid 2px black;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+    }
+  }
+}
+
+@mixin swiper($theme) {
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: map-get($theme, 'background');
+  }
+
+  .swiper-item-thumb__picture {
+
+    border: solid 2px transparent;
+
+    &--active {
+
+      border: solid 2px map-get($theme, 'primary');
+
+      &::before {
+        background: transparentize(map-get($theme, 'background'), 0.33);
+      }
+    }
+  }
+}
+
 $theme-orange: (
   'primary': hsl(26, 100%, 55%),
   'secondary': hsl(25, 100%, 94%),
@@ -245,4 +324,5 @@ $theme-orange: (
   @include icon($theme-orange);
   @include hr($theme-orange);
   @include avatar($theme-orange);
+  @include swiper($theme-orange);
 }
