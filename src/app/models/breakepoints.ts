@@ -1,11 +1,15 @@
 export const BreakpointsMin = {
-  mobile: 0,
-  desktop: 768
+  phone: 0,
+  tablet: 600,
+  desktop: 840
 };
 
 export const Breakpoints = {
-  mobile: {
-    selector: `(max-width: ${BreakpointsMin.desktop - 1}px)`,
+  phone: {
+    selector: `(min-width: 0) and (max-width: ${BreakpointsMin.tablet - 1}px)`,
+  },
+  tablet: {
+    selector: `(min-width: ${BreakpointsMin.tablet}px) and (max-width: ${BreakpointsMin.desktop - 1}px)`,
   },
   desktop: {
     selector: `(min-width: ${BreakpointsMin.desktop}px)`

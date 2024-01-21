@@ -1,7 +1,7 @@
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {Injectable, signal} from '@angular/core';
+import {computed, Injectable, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {Breakpoints, BreakpointsMin} from '../models/breakepoints';
+import {Breakpoints} from '../models/breakepoints';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +9,36 @@ import {Breakpoints, BreakpointsMin} from '../models/breakepoints';
 export class BreakpointsService {
 
   private _displayNameMap = new Map([
-    [Breakpoints.mobile.selector, BreakpointsMin.mobile],
-    [Breakpoints.desktop.selector, BreakpointsMin.desktop],
+    [Breakpoints.phone.selector, 'phone'],
+    [Breakpoints.tablet.selector, 'tablet'],
+    [Breakpoints.desktop.selector, 'desktop'],
   ]);
 
-  private _currentScreenSize = signal<number | undefined>(undefined);
+  private _currentScreenSize = signal<string | undefined>(undefined);
 
-  get currentScreenSize() {
-    return this._currentScreenSize.asReadonly();
-  }
+  isOnPhone = computed(() => {
+    return !!['phone'].find((screenSize) => screenSize === this._currentScreenSize() || '');
+  });
+
+  isOnTablet = computed(() => {
+    return !!['tablet'].find((screenSize) => screenSize === this._currentScreenSize() || '');
+  });
+
+  isOnDesktop = computed(() => {
+    return !!['desktop'].find((screenSize) => screenSize === this._currentScreenSize() || '');
+  });
+
+  isOnTabletAndBellow = computed(() => {
+    return !!['tablet', 'phone'].find((screenSize) => screenSize === this._currentScreenSize() || '');
+  });
 
   constructor(
     private breakpointObserver: BreakpointObserver
   ) {
     this.breakpointObserver
       .observe([
-        Breakpoints.mobile.selector,
+        Breakpoints.phone.selector,
+        Breakpoints.tablet.selector,
         Breakpoints.desktop.selector
       ])
       .pipe(takeUntilDestroyed())
