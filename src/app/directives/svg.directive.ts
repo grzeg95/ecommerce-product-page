@@ -1,27 +1,14 @@
 import {HttpClient} from '@angular/common/http';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnChanges,
-  Renderer2,
-  ViewEncapsulation
-} from '@angular/core';
+import {ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, OnChanges, Renderer2} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {Subject, switchMap} from 'rxjs';
-import {DomPurifyService} from '../../services/dom-purify.service';
+import {DomPurifyService} from '../services/dom-purify.service';
 
-@Component({
-  selector: 'app-svg-ext',
+@Directive({
+  selector: '[appSvg]',
   standalone: true,
-  templateUrl: './svg-ext.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
 })
-export class SvgExtComponent implements OnChanges {
+export class SvgDirective implements OnChanges {
 
   @Input() src!: string;
   @Input() @HostBinding('attr.aria-label') arialLabel!: string;
@@ -54,17 +41,27 @@ export class SvgExtComponent implements OnChanges {
       if (!svg.hasAttribute('viewBox')) {
 
         if (svg.hasAttribute('width') && svg.hasAttribute('height')) {
-          svg.setAttribute('viewBox', `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`);
-          svg.removeAttribute('width');
-          svg.removeAttribute('height');
+          this._renderer.setAttribute(nativeElement, 'viewBox', `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`);
+          this._renderer.removeAttribute(svg, 'width');
+          this._renderer.removeAttribute(svg, 'height');
         }
 
       } else {
-        svg.removeAttribute('width');
-        svg.removeAttribute('height');
+        this._renderer.removeAttribute(svg, 'width');
+        this._renderer.removeAttribute(svg, 'height');
       }
 
-      this._renderer.appendChild(nativeElement, svg);
+      // copy all attributes
+
+      svg.getAttributeNames().forEach((attrName) => {
+        this._renderer.setAttribute(nativeElement, attrName, svg.getAttribute(attrName)!);
+      });
+
+      // append all elements
+
+      svg.childNodes.forEach((node) => {
+        this._renderer.appendChild(nativeElement, node);
+      });
 
       this._cdr.markForCheck();
     });
