@@ -5,7 +5,13 @@
     <div class="flex flex-align-items-center" [ngClass]="isOnTabletAndBellow() ? 'gap-16' : 'gap-56'">
 
       @if (isOnTabletAndBellow()) {
-        <div class="burger-menu-icon" (click)="isAsideShown.set(true)"></div>
+        <svg
+          appSvg
+          [src]="'/assets/images/icon-menu.svg'"
+          class="icon"
+          appHoverClasses="icon--active pointer"
+          (click)="isAsideShown.set(true)"
+        ></svg>
       }
 
       <a aria-label="Home" routerLink="/" class="header__logo">
