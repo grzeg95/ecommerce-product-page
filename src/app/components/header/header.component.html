@@ -2,9 +2,9 @@
 
   <div class="flex flex-justify-content-space-between flex-align-items-center">
 
-    <div class="flex flex-align-items-center" [ngClass]="isOnMobile() ? 'gap-16' : 'gap-56'">
+    <div class="flex flex-align-items-center" [ngClass]="isOnTabletAndBellow() ? 'gap-16' : 'gap-56'">
 
-      @if (isOnMobile()) {
+      @if (isOnTabletAndBellow()) {
         <div class="burger-menu-icon" (click)="isAsideShown.set(true)"></div>
       }
 
@@ -12,7 +12,7 @@
         <img src="/assets/images/logo.svg" alt="Logo" />
       </a>
 
-      @if (!isOnMobile()) {
+      @if (!isOnTabletAndBellow()) {
         <div class="flex gap-32 flex-align-items-center">
           @for (link of links; track link) {
             <a class="header__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
@@ -22,19 +22,20 @@
 
     </div>
 
-    <div class="flex width-auto gap-12 flex-align-items-center" [class.gap-32]="!isOnMobile()">
+    <div class="flex width-auto gap-12 flex-align-items-center" [class.gap-32]="!isOnTabletAndBellow()">
 
       <div class="flex">
-        <app-svg-ext
+        <svg
+          appSvg
           class="icon"
           appHoverClasses="icon--active pointer"
           [src]="'/assets/images/icon-cart.svg'"
-          [class.icon__big]="!isOnMobile()"
+          [class.icon__big]="!isOnTabletAndBellow()"
         />
       </div>
 
       <div class="flex">
-        <img class="avatar avatar-header" [class.avatar--big]="!isOnMobile()" src="/assets/images/image-avatar.png">
+        <img class="avatar avatar-header" [class.avatar--big]="!isOnTabletAndBellow()" src="/assets/images/image-avatar.png">
       </div>
 
     </div>
@@ -45,9 +46,9 @@
 
 <hr class="margin-0"/>
 
-@if (isAsideShown() && isOnMobile()) {
+@if (isAsideShown() && isOnTabletAndBellow()) {
 
-  <div class="fixed top-0 left-0 background__drop width-100 height-100 z-index-1" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
+  <div class="fixed top-0 left-0 background__drop width-100 height-100 z-index-2" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
 
   <aside class="width-px-250 fixed top-0 left-0 height-100 z-index-2" [@slideInOutFromLeft]="">
 
@@ -55,12 +56,13 @@
 
       <div class="flex flex-column gap-56">
 
-        <app-svg-ext
+        <svg
+          appSvg
           class="icon"
           appHoverClasses="icon--active pointer"
           [src]="'/assets/images/icon-close.svg'"
           arialLabel="Close mobile menu"
-          [class.icon__big]="!isOnMobile()"
+          [class.icon__big]="!isOnTabletAndBellow()"
           (click)="isAsideShown.set(false)"
         />
 

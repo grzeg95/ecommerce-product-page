@@ -1,19 +1,18 @@
 import {NgClass} from '@angular/common';
-import {ChangeDetectionStrategy, Component, computed, signal, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal, ViewEncapsulation} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {fadeInOut} from '../../animations/fade-in-out';
 import {slideInOutFromLeft} from '../../animations/slide-in-out-from-left';
 import {HoverClassesDirective} from '../../directives/hover-class.directive';
-import {BreakpointsMin} from '../../models/breakepoints';
+import {SvgDirective} from '../../directives/svg.directive';
 import {BreakpointsService} from '../../services/breakpoints.service';
-import {SvgExtComponent} from '../svg-ext/svg-ext.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     NgClass,
-    SvgExtComponent,
+    SvgDirective,
     RouterLink,
     HoverClassesDirective,
     RouterLinkActive
@@ -34,9 +33,7 @@ export class HeaderComponent {
 
   isAsideShown = signal<boolean>(false);
 
-  isOnMobile = computed(() => {
-    return (this._breakpointsService.currentScreenSize() || 0) < BreakpointsMin.desktop;
-  });
+  isOnTabletAndBellow = this._breakpointsService.isOnTabletAndBellow;
 
   links = [
     {
