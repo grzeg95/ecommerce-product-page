@@ -1,0 +1,35 @@
+<div class="relative">
+
+  <swiper-container [class.swiper-item-catalog-gallery]="!isOnPhone()" appSwiper #appSwiper [config]="swiperConfig" (slideChange)="handleSlideChange($event)">
+    @for (image of images.normal; track image) {
+      <swiper-slide appSwiperSlide>
+        <div class="height-100" [ngStyle]="{
+              background: 'url(' + image +') no-repeat top center / contain',
+              borderRadius: '16px'
+            }"></div>
+      </swiper-slide>
+    }
+  </swiper-container>
+
+  @if (images.normal.length > 1 && isOnPhone()) {
+    <div role="button" class="swiper-button-prev" [class.swiper-button-disabled]="activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
+      <svg appSvg [src]="'/assets/images/icon-previous.svg'"></svg>
+    </div>
+
+    <div role="button" class="swiper-button-next" [class.swiper-button-disabled]="activeIndex() === images.normal.length - 1" (click)="appSwiper.swiper.slideNext()">
+      <svg appSvg [src]="'/assets/images/icon-next.svg'"></svg>
+    </div>
+  }
+
+</div>
+
+<swiper-container appSwiper #appSwiperThumbs [config]="swiperThumbsConfig" [hidden]="isOnPhone()">
+  @for (image of images.thumb; track image; let i = $index) {
+    <swiper-slide appSwiperSlide class="swiper-item-thumb__picture" [class.swiper-item-thumb__picture--active]="appSwiper.swiper.activeIndex === i" (click)="appSwiper.swiper.slideTo(i);">
+      <div class="height-100" [ngStyle]="{
+              background: 'url(' + image +') no-repeat top center / contain',
+              borderRadius: '6px'
+             }"></div>
+    </swiper-slide>
+  }
+</swiper-container>
