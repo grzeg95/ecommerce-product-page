@@ -13,7 +13,7 @@ import {SvgDirective} from '../../directives/svg.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'app-spinner'
+    class: 'app-spinner d-flex user-select-none justify-content-between rounded-3'
   },
   providers: [
     {

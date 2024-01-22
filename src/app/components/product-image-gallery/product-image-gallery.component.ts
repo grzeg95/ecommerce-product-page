@@ -2,6 +2,7 @@ import {NgStyle} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   EventEmitter,
   Input,
@@ -27,23 +28,41 @@ import {BreakpointsService} from '../../services/breakpoints.service';
     NgStyle
   ],
   templateUrl: './product-image-gallery.component.html',
-  styleUrl: './product-image-gallery.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'app-product-image-gallery'
-  }
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductImageGalleryComponent {
 
   @Input({required: true}) images!: {normal: string[]; thumb: string[]};
-
+  @Output() activeIndexChange = new EventEmitter<number>();
   @ViewChild('appSwiper') protected appSwiper!: ElementRef<SwiperContainer>;
   @ViewChild('appSwiperThumbs') protected appSwiperThumbs!: ElementRef<SwiperContainer>;
   @ViewChild('swiperButtonPrev') protected swiperButtonPrev!: ElementRef<HTMLDivElement>;
   @ViewChild('swiperButtonNext') protected swiperButtonNext!: ElementRef<HTMLDivElement>;
+  protected swiperConfig: SwiperOptions = {
+    spaceBetween: 10
+  }
+  protected swiperThumbsConfig: SwiperOptions = {
+    spaceBetween: 30,
+    slidesPerView: 4,
+    freeMode: true,
+    watchSlidesProgress: false,
+    slideToClickedSlide: false
+  }
+  protected isOnSmallAndBellow = computed(() => {
+    const currentScreenSizes = this._breakpointsService.currentScreenSizes();
+    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'medium');
+  });
 
-  @Output() activeIndexChange = new EventEmitter<number>();
+  protected isOnExtraSmallAndBellow = computed(() => {
+    const currentScreenSizes = this._breakpointsService.currentScreenSizes();
+    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'small');
+  });
+
+  constructor(
+    private _breakpointsService: BreakpointsService
+  ) {
+  }
+
   protected _activeIndex = signal(0);
 
   @Input() set activeIndex(activeIndex: number) {
@@ -52,25 +71,6 @@ export class ProductImageGalleryComponent {
       this.appSwiperThumbs.nativeElement.swiper.slideTo(activeIndex, 0);
       this._activeIndex.set(activeIndex);
     });
-  }
-
-  protected swiperConfig: SwiperOptions = {
-    spaceBetween: 10
-  }
-
-  protected swiperThumbsConfig: SwiperOptions = {
-    spaceBetween: 30,
-    slidesPerView: 4,
-    freeMode: true,
-    watchSlidesProgress: false,
-    slideToClickedSlide: false
-  }
-
-  protected isOnPhone = this._breakpointsService.isOnPhone;
-
-  constructor(
-    private _breakpointsService: BreakpointsService
-  ) {
   }
 
   protected handleSlideChange(activeIndex: number) {

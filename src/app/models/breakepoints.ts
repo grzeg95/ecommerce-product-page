@@ -1,17 +1,25 @@
 export const BreakpointsMin = {
-  phone: 0,
-  tablet: 600,
-  desktop: 840
+  extraSmall: 0,
+  small: 576,
+  medium: 768,
+  large: 992,
+  extraLarge: 1200
 };
 
 export const Breakpoints = {
-  phone: {
-    selector: `(min-width: 0) and (max-width: ${BreakpointsMin.tablet - 1}px)`,
+  extraSmall: {
+    selector: `(min-width: 0) and (max-width: ${BreakpointsMin.small - 1}px)`,
   },
-  tablet: {
-    selector: `(min-width: ${BreakpointsMin.tablet}px) and (max-width: ${BreakpointsMin.desktop - 1}px)`,
+  small: {
+    selector: `(min-width: ${BreakpointsMin.small}px) and (max-width: ${BreakpointsMin.medium - 1}px)`,
   },
-  desktop: {
-    selector: `(min-width: ${BreakpointsMin.desktop}px)`
+  medium: {
+    selector: `(min-width: ${BreakpointsMin.medium}px) and (max-width: ${BreakpointsMin.large - 1}px)`,
+  },
+  large: {
+    selector: `(min-width: ${BreakpointsMin.large}px) and (max-width: ${BreakpointsMin.extraLarge - 1}px)`,
+  },
+  extraLarge: {
+    selector: `(min-width: ${BreakpointsMin.extraLarge}px)`
   }
 };

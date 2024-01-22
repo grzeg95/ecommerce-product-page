@@ -1,5 +1,5 @@
 import {NgStyle} from '@angular/common';
-import {AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, signal, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, computed, CUSTOM_ELEMENTS_SCHEMA, ElementRef, signal, ViewChild} from '@angular/core';
 import {SwiperContainer} from 'swiper/swiper-element';
 import {SwiperOptions} from 'swiper/types';
 import {SvgDirective} from '../../directives/svg.directive';
@@ -49,7 +49,10 @@ export class ItemsCatalogDetailsComponent implements AfterViewInit {
     slideToClickedSlide: false
   }
 
-  isOnPhone = this._breakpointsService.isOnPhone;
+  protected isOnSmallAndBellow = computed(() => {
+    const currentScreenSizes = this._breakpointsService.currentScreenSizes();
+    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'medium');
+  });
 
   protected activeIndex = signal(0);
 

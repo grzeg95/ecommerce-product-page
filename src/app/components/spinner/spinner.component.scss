@@ -1,19 +1,11 @@
 .app-spinner {
 
-  display: flex;
-  justify-content: space-between;
   background: silver;
-  border-radius: 8px;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   &__button {
 
     width: 12px;
-    padding: 16px;
     box-sizing: content-box;
-    cursor: pointer;
 
     path {
       fill: black !important;
@@ -30,10 +22,6 @@
   }
 
   &__value {
-    text-align: center;
-    width: 2rem;
-    padding: 16px;
-    box-sizing: content-box;
-    font-weight: bold;
+    color: black;
   }
 }

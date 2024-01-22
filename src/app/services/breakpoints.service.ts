@@ -9,27 +9,30 @@ import {Breakpoints} from '../models/breakepoints';
 export class BreakpointsService {
 
   private _displayNameMap = new Map([
-    [Breakpoints.phone.selector, 'phone'],
-    [Breakpoints.tablet.selector, 'tablet'],
-    [Breakpoints.desktop.selector, 'desktop'],
+    [Breakpoints.extraSmall.selector, 'extraSmall'],
+    [Breakpoints.small.selector, 'small'],
+    [Breakpoints.medium.selector, 'medium'],
+    [Breakpoints.large.selector, 'large'],
+    [Breakpoints.extraLarge.selector, 'extraLarge'],
   ]);
 
+  readonly screenSizeNames = ['extraSmall', 'small', 'medium', 'large', 'extraLarge'];
   private _currentScreenSize = signal<string | undefined>(undefined);
+  currentScreenSizes = computed(() => {
 
-  isOnPhone = computed(() => {
-    return !!['phone'].find((screenSize) => screenSize === this._currentScreenSize() || '');
-  });
+    const screenSizeNames = [];
+    const currentScreenSize = this._currentScreenSize();
 
-  isOnTablet = computed(() => {
-    return !!['tablet'].find((screenSize) => screenSize === this._currentScreenSize() || '');
-  });
+    for (const screenSizeName of this.screenSizeNames) {
 
-  isOnDesktop = computed(() => {
-    return !!['desktop'].find((screenSize) => screenSize === this._currentScreenSize() || '');
-  });
+      screenSizeNames.push(screenSizeName);
 
-  isOnTabletAndBellow = computed(() => {
-    return !!['tablet', 'phone'].find((screenSize) => screenSize === this._currentScreenSize() || '');
+      if (screenSizeName === currentScreenSize) {
+        break;
+      }
+    }
+
+    return screenSizeNames;
   });
 
   constructor(
@@ -37,9 +40,11 @@ export class BreakpointsService {
   ) {
     this.breakpointObserver
       .observe([
-        Breakpoints.phone.selector,
-        Breakpoints.tablet.selector,
-        Breakpoints.desktop.selector
+        Breakpoints.extraSmall.selector,
+        Breakpoints.small.selector,
+        Breakpoints.medium.selector,
+        Breakpoints.large.selector,
+        Breakpoints.extraLarge.selector,
       ])
       .pipe(takeUntilDestroyed())
       .subscribe(result => {

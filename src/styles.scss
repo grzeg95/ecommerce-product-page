@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
-@import 'style/layout-grid/mdc-layout-grid';
-@import './app/components/header/theme';
+@import 'app/components/header/theme';
 @import './app/components/spinner/theme';
 
 * {
@@ -12,84 +11,35 @@ body {
   font-family: 'Kumbh Sans', sans-serif;
 }
 
+.mw {
+
+  @media (min-width: 768px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1110px;
+  }
+}
+
 @mixin container($theme) {
   background: map-get($theme, 'background');
   color: map-get($theme, 'color');
-}
-
-.gap-12 {
-  gap: 0.75rem;
-}
-
-.gap-16 {
-  gap: 1rem;
-}
-
-.gap-32 {
-  gap: 2rem;
-}
-
-.gap-56 {
-  gap: 3.5rem;
-}
-
-.margin-0 {
-  margin: 0;
-}
-
-.margin-0-auto {
-  margin: 0 auto;
-}
-
-.width-auto {
-  width: auto;
-}
-
-.width-100 {
-  width: 100%;
-}
-
-.height-100 {
-  height: 100%;
-}
-
-.flex {
-  display: flex;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-align-items-center {
-  align-items: center;
-}
-
-.flex-align-items-start {
-  align-items: flex-start;
-}
-
-.flex-justify-content-space-between {
-  justify-content: space-between;
-}
-
-.spacer {
-
-  &__vertically {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  &__horizontally {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
 }
 
 .icon {
 
   width: 1.25rem;
   height: 1.25rem;
+  cursor: pointer;
 
   path {
     fill: silver !important;
@@ -170,14 +120,6 @@ hr {
   }
 }
 
-.fixed {
-  position: fixed;
-}
-
-.relative {
-  position: relative;
-}
-
 .width-px-250 {
   width: 250px;
 }
@@ -202,34 +144,9 @@ hr {
   }
 }
 
-.top-0 {
-  top: 0;
-}
-
-.left-0 {
-  left: 0;
-}
-
-.z-index-1 {
-  z-index: 1;
-}
-
-.z-index-2 {
-  z-index: 2;
-}
-
 svg {
   width: 100%;
   height: 100%;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 1110px;
 }
 
 .swiper-button-next,

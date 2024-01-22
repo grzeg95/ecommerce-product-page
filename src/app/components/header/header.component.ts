@@ -23,7 +23,7 @@ import {CartService} from '../../services/cart.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'app-header'
+    class: 'app-header d-block mx-auto mw'
   },
   animations: [
     slideInOutFromLeft,
@@ -34,7 +34,10 @@ export class HeaderComponent {
 
   isAsideShown = signal<boolean>(false);
 
-  isOnTabletAndBellow = this._breakpointsService.isOnTabletAndBellow;
+  isOnMediumAndBellow = computed(() => {
+    const currentScreenSizes = this._breakpointsService.currentScreenSizes();
+    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'large');
+  });
 
   cartItemsLength = computed(() => {
     return this._cartService.productsCart().reduce((value, product) => value + product.quantity, 0);
