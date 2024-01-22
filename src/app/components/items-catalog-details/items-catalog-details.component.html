@@ -1,46 +1,64 @@
-<div class="container">
-  <div class="row justify-content-around">
-    <div class="col-md-6 col-lg-5">
+@if (product) {
 
-      <div class="relative">
+  @if (isOnExtraSmallAndBellow()) {
+    <app-product-image-gallery [(activeIndex)]="galleryActiveIndex" [images]="product.images"/>
+  }
 
-        <swiper-container class="swiper-item-catalog-gallery" appSwiper #appSwiper [config]="swiperConfig" (slideChange)="handleSlideChange($event)">
-          @for (image of images; track image) {
-            <swiper-slide appSwiperSlide>
-              <div class="h-100" [ngStyle]="{
-              background: 'url(' + image +') no-repeat top center / contain',
-              borderRadius: '16px'
-            }"></div>
-            </swiper-slide>
-          }
-        </swiper-container>
+  <div class="container mw">
+    <div class="row justify-content-around">
 
-        @if (images.length && isOnSmallAndBellow()) {
-          <div class="swiper-button-prev" [class.swiper-button-disabled]="activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
-            <svg appSvg [src]="'/assets/images/icon-previous.svg'"></svg>
+      @if (!isOnExtraSmallAndBellow()) {
+        <div class="col-md-6 col-lg-5">
+          <app-product-image-gallery [(activeIndex)]="galleryActiveIndex" [images]="product.images"/>
+        </div>
+      }
+
+      <div class="col-12 mt-4 mt-md-0 col-md-6 col-lg-5">
+        <div class="d-flex flex-column h-100 justify-content-center">
+
+          <div class="company-name fs-small fw-bold">{{ product.company }}</div>
+          <div class="name mt-2 fs-3 fw-bold">{{ product.name }}</div>
+          <div class="description lh-base mt-2">{{ product.description }}</div>
+
+          <div class="d-flex flex-md-column justify-content-between align-items-center align-items-md-start mt-3">
+
+            <div class="d-flex align-items-center gap-3">
+              <span class="price fw-bold fs-3">${{ product.pricePlan.price | number : '1.2' }}</span>
+
+              @if (product.pricePlan.discount) {
+                <span class="discount pt-1 pb-1 ps-2 pe-2 fw-bold rounded-3">{{ product.pricePlan.discount }}%</span>
+              }
+            </div>
+
+            @if (product.pricePlan.discount) {
+              <div class="old-price fw-bold">
+                <del>${{ div(times(product.pricePlan.price, 100), product.pricePlan.discount) | number : '1.2' }}</del>
+              </div>
+            }
+
           </div>
 
-          <div class="swiper-button-next" [class.swiper-button-disabled]="activeIndex() === images.length - 1" (click)="appSwiper.swiper.slideNext()">
-            <svg appSvg [src]="'/assets/images/icon-next.svg'"></svg>
-          </div>
-        }
+          <div class="d-flex flex-column flex-md-row justify-content-between mt-3">
 
+            <div class="col-12 col-md-4">
+              <app-spinner [(ngModel)]="quantity" [min]="1" [max]="10" />
+            </div>
+
+            <div class="col-12 col-md-7 mt-3 mt-md-0">
+              <button class="app-button-flat w-100" (click)="addProduct()">
+                <svg
+                  class="app-button-flat__icon"
+                  appSvg
+                  [src]="'/assets/images/icon-cart.svg'"
+                ></svg>
+                <span>Add to cart</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
       </div>
-
-      <swiper-container appSwiper #appSwiperThumbs [config]="swiperThumbsConfig" [hidden]="isOnSmallAndBellow()">
-        @for (image of images; track image; let i = $index) {
-          <swiper-slide appSwiperSlide class="swiper-item-thumb__picture" [class.swiper-item-thumb__picture--active]="appSwiper.swiper.activeIndex === i" (click)="appSwiper.swiper.slideTo(i);">
-            <div class="h-100" [ngStyle]="{
-              background: 'url(' + image +') no-repeat top center / contain',
-              borderRadius: '6px'
-             }"></div>
-          </swiper-slide>
-        }
-      </swiper-container>
-
-    </div>
-    <div class="col-12 col-md-6 col-lg-5">
 
     </div>
   </div>
-</div>
+}

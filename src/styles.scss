@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
 @import 'app/components/header/theme';
 @import './app/components/spinner/theme';
+@import './app/components/items-catalog-details/theme';
 
 * {
   box-sizing: border-box;
@@ -312,7 +313,7 @@ $theme-orange: (
   'secondary': hsl(25, 100%, 94%),
   'color': hsl(220, 13%, 13%),
   'inactive': hsl(219, 9%, 45%),
-  // 'undefined': hsl(220, 14%, 75%),
+  'old': hsl(220, 14%, 75%),
   'hr': #E8E7EC,
   'accent': hsl(223, 64%, 98%),
   'background': hsl(0, 0%, 100%),
@@ -328,5 +329,6 @@ $theme-orange: (
   @include swiper($theme-orange);
   @include badge($theme-orange);
   @include spinner($theme-orange);
+  @include app-items-catalog-details($theme-orange);
   @include app-button-flat($theme-orange);
 }

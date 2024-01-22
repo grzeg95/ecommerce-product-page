@@ -1,0 +1,30 @@
+@mixin app-items-catalog-details($theme) {
+
+  .app-items-catalog-details {
+
+    .company-name {
+      color: map-get($theme, 'primary');
+    }
+
+    .name {
+      color: map-get($theme, 'color');
+    }
+
+    .description {
+      color: map-get($theme, 'color');
+    }
+
+    .price {
+      color: map-get($theme, 'color');
+    }
+
+    .discount {
+      background-color: map-get($theme, 'secondary');
+      color: map-get($theme, 'primary');
+    }
+
+    .old-price {
+      color: map-get($theme, 'old');
+    }
+  }
+}

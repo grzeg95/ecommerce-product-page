@@ -1,11 +1,25 @@
-import {NgStyle} from '@angular/common';
-import {AfterViewInit, Component, computed, CUSTOM_ELEMENTS_SCHEMA, ElementRef, signal, ViewChild} from '@angular/core';
-import {SwiperContainer} from 'swiper/swiper-element';
-import {SwiperOptions} from 'swiper/types';
+import {DecimalPipe, NgStyle} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  computed,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HoverClassesDirective} from '../../directives/hover-class.directive';
 import {SvgDirective} from '../../directives/svg.directive';
 import {SwiperSlideDirective} from '../../directives/swiper-slide.directive';
 import {SwiperDirective} from '../../directives/swiper.directive';
+import {Product} from '../../models/product';
+import {ApiService} from '../../services/api.service';
+import {div, times} from '../../utils/big-number';
 import {BreakpointsService} from '../../services/breakpoints.service';
+import {CartService} from '../../services/cart.service';
+import {ProductImageGalleryComponent} from '../product-image-gallery/product-image-gallery.component';
+import {SpinnerComponent} from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-items-catalog-details',
@@ -14,74 +28,53 @@ import {BreakpointsService} from '../../services/breakpoints.service';
     SwiperDirective,
     NgStyle,
     SwiperSlideDirective,
-    SvgDirective
+    SvgDirective,
+    ProductImageGalleryComponent,
+    HoverClassesDirective,
+    SpinnerComponent,
+    FormsModule,
+    DecimalPipe
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   templateUrl: './items-catalog-details.component.html',
-  styleUrl: './items-catalog-details.component.scss'
+  styleUrl: './items-catalog-details.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'app-items-catalog-details d-block mt-0 mt-sm-4 mt-lg-5'
+  }
 })
-export class ItemsCatalogDetailsComponent implements AfterViewInit {
+export class ItemsCatalogDetailsComponent implements OnInit {
 
-  @ViewChild('appSwiper') appSwiper!: ElementRef<SwiperContainer>;
-  @ViewChild('appSwiperThumbs') appSwiperThumbs!: ElementRef<SwiperContainer>;
+  protected product: Product | null = null;
+  protected readonly times = times;
+  protected readonly div = div;
 
-  @ViewChild('swiperButtonPrev') swiperButtonPrev!: ElementRef<HTMLDivElement>;
-  @ViewChild('swiperButtonNext') swiperButtonNext!: ElementRef<HTMLDivElement>;
+  quantity = '1';
 
-  images = [
-    '/assets/images/image-product-1.jpg',
-    '/assets/images/image-product-2.jpg',
-    '/assets/images/image-product-3.jpg',
-    '/assets/images/image-product-4.jpg'
-  ];
-
-  swiperConfig: SwiperOptions = {
-    spaceBetween: 10
-  }
-
-  swiperThumbsConfig: SwiperOptions = {
-    spaceBetween: 30,
-    slidesPerView: 4,
-    freeMode: true,
-    watchSlidesProgress: false,
-    slideToClickedSlide: false
-  }
-
-  protected isOnSmallAndBellow = computed(() => {
+  protected isOnExtraSmallAndBellow = computed(() => {
     const currentScreenSizes = this._breakpointsService.currentScreenSizes();
-    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'medium');
+    return !currentScreenSizes.find((currentScreenSize) => currentScreenSize === 'small');
   });
 
-  protected activeIndex = signal(0);
+  protected galleryActiveIndex = 0;
 
   constructor(
+    private _cdr: ChangeDetectorRef,
+    private _apiService: ApiService,
+    private _cartService: CartService,
     private _breakpointsService: BreakpointsService
   ) {
   }
 
-  ngAfterViewInit() {
+  async ngOnInit() {
+    this.product = await this._apiService.getProduct(1);
+    this._cdr.detectChanges();
   }
 
-  handleSlideChange(activeIndex: number) {
-
-    const swiperActiveIndex = activeIndex;
-    const swiperThumbsActiveIndex = this.appSwiperThumbs.nativeElement.swiper.activeIndex;
-    const slidesPerView = this.swiperThumbsConfig.slidesPerView as number;
-
-    // edge
-
-    const view = (slidesPerView - swiperActiveIndex) + swiperThumbsActiveIndex;
-
-    if (view === 1) {
-      this.appSwiperThumbs.nativeElement.swiper.slideNext();
-    }
-
-    if (view === slidesPerView) {
-      this.appSwiperThumbs.nativeElement.swiper.slidePrev();
-    }
-
-    this.activeIndex.set(activeIndex);
+  protected async addProduct() {
+    await this._cartService.addProduct(this.product!.id, parseInt(this.quantity));
   }
 }
