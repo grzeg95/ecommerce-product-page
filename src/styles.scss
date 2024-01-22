@@ -30,6 +30,10 @@ body {
   }
 }
 
+.fs-small {
+  font-size: 0.75rem !important;
+}
+
 @mixin container($theme) {
   background: map-get($theme, 'background');
   color: map-get($theme, 'color');
@@ -256,6 +260,53 @@ svg {
   }
 }
 
+.app-button-flat {
+
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  background: black;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 14px;
+  width: fit-content;
+  align-items: center;
+
+  &:hover {
+    background: dimgray;
+  }
+
+  &__icon {
+
+    color: white;
+    width: 18px;
+
+    path {
+      fill: white !important;
+    }
+  }
+}
+
+@mixin app-button-flat($theme) {
+
+  .app-button-flat {
+
+    color: map-get($theme, 'background');
+    background: map-get($theme, 'primary');
+
+    &:hover {
+      color: map-get($theme, 'background');
+      background: transparentize(map-get($theme, 'primary'), 0.4);
+    }
+  }
+}
+
 $theme-orange: (
   'primary': hsl(26, 100%, 55%),
   'secondary': hsl(25, 100%, 94%),
@@ -277,4 +328,5 @@ $theme-orange: (
   @include swiper($theme-orange);
   @include badge($theme-orange);
   @include spinner($theme-orange);
+  @include app-button-flat($theme-orange);
 }
