@@ -5,7 +5,7 @@
       <swiper-slide appSwiperSlide>
         <div class="height-100" [ngStyle]="{
               background: 'url(' + image +') no-repeat top center / contain',
-              borderRadius: '16px'
+              borderRadius: isOnPhone() ? '0px': '16px'
             }"></div>
       </swiper-slide>
     }
