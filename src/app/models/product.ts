@@ -12,3 +12,14 @@ export type Product = {
     thumb: string[]
   }
 }
+
+export type ProductCart = {
+  id: number,
+  quantity: number
+  name: string,
+  image: string,
+  pricePlan: {
+    price: number,
+    discount: number
+  },
+};
