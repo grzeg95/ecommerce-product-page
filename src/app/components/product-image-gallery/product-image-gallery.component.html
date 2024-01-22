@@ -12,11 +12,11 @@
   </swiper-container>
 
   @if (images.normal.length > 1 && isOnPhone()) {
-    <div role="button" class="swiper-button-prev" [class.swiper-button-disabled]="activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
+    <div role="button" class="swiper-button-prev" [class.swiper-button-disabled]="_activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
       <svg appSvg [src]="'/assets/images/icon-previous.svg'"></svg>
     </div>
 
-    <div role="button" class="swiper-button-next" [class.swiper-button-disabled]="activeIndex() === images.normal.length - 1" (click)="appSwiper.swiper.slideNext()">
+    <div role="button" class="swiper-button-next" [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1" (click)="appSwiper.swiper.slideNext()">
       <svg appSvg [src]="'/assets/images/icon-next.svg'"></svg>
     </div>
   }

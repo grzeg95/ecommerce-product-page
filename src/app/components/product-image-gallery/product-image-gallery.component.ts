@@ -3,7 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
+  Output,
   signal,
   ViewChild,
   ViewEncapsulation
@@ -41,6 +43,17 @@ export class ProductImageGalleryComponent {
   @ViewChild('swiperButtonPrev') protected swiperButtonPrev!: ElementRef<HTMLDivElement>;
   @ViewChild('swiperButtonNext') protected swiperButtonNext!: ElementRef<HTMLDivElement>;
 
+  @Output() activeIndexChange = new EventEmitter<number>();
+  protected _activeIndex = signal(0);
+
+  @Input() set activeIndex(activeIndex: number) {
+    setTimeout(() => {
+      this.appSwiper.nativeElement.swiper.slideTo(activeIndex, 0);
+      this.appSwiperThumbs.nativeElement.swiper.slideTo(activeIndex, 0);
+      this._activeIndex.set(activeIndex);
+    });
+  }
+
   protected swiperConfig: SwiperOptions = {
     spaceBetween: 10
   }
@@ -54,8 +67,6 @@ export class ProductImageGalleryComponent {
   }
 
   protected isOnPhone = this._breakpointsService.isOnPhone;
-
-  protected activeIndex = signal(0);
 
   constructor(
     private _breakpointsService: BreakpointsService
@@ -80,6 +91,7 @@ export class ProductImageGalleryComponent {
       this.appSwiperThumbs.nativeElement.swiper.slidePrev();
     }
 
-    this.activeIndex.set(activeIndex);
+    this._activeIndex.set(activeIndex);
+    this.activeIndexChange.emit(activeIndex);
   }
 }
