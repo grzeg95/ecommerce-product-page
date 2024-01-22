@@ -94,7 +94,7 @@ body {
     fill: silver !important;
   }
 
-  &--active {
+  &--active, &--active-2 {
     path {
       fill: black !important;
     }
@@ -113,7 +113,7 @@ body {
       fill: map-get($theme, 'inactive') !important;
     }
 
-    &--active {
+    &--active, &--active-2 {
       path {
         fill: map-get($theme, 'color') !important;
       }
@@ -306,6 +306,38 @@ svg {
   }
 }
 
+.badge {
+
+  min-width: 13px;
+  height: 13px;
+  background: tomato;
+  color: white;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  box-sizing: content-box;
+  border-radius: 15px;
+
+  &__big {
+    min-width: 15px;
+    height: 15px;
+    font-size: 0.75rem;
+  }
+}
+
+@mixin badge($theme) {
+
+  .badge {
+    background: map-get($theme, 'primary');
+    color: map-get($theme, 'background');
+  }
+}
+
 $theme-orange: (
   'primary': hsl(26, 100%, 55%),
   'secondary': hsl(25, 100%, 94%),
@@ -325,4 +357,5 @@ $theme-orange: (
   @include hr($theme-orange);
   @include avatar($theme-orange);
   @include swiper($theme-orange);
+  @include badge($theme-orange);
 }
