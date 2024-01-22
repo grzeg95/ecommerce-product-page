@@ -1,0 +1,27 @@
+@mixin spinner($theme) {
+
+  .app-spinner {
+
+    background: map-get($theme, 'accent');
+
+    &__button {
+
+      path {
+        fill: map-get($theme, 'primary') !important;
+      }
+
+      &--disabled {
+
+        pointer-events: none;
+
+        path {
+          fill: transparentize(map-get($theme, 'primary'), 0.6) !important;
+        }
+      }
+    }
+
+    &__value {
+      color: map-get($theme, 'color');
+    }
+  }
+}

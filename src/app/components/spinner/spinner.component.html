@@ -1,0 +1,25 @@
+<div
+  role="button"
+  class="app-spinner__button"
+  [class.app-spinner__button--disabled]="parseInt(this.value) <= this.min"
+  (click)="_onButtonClick($event, parseInt(this.value) - 1)"
+>
+  <svg
+    appSvg
+    [src]="'/assets/images/icon-minus.svg'"
+  ></svg>
+</div>
+
+<div class="app-spinner__value">{{ value }}</div>
+
+<div
+  role="button"
+  class="app-spinner__button"
+  [class.app-spinner__button--disabled]="parseInt(this.value) >= this.max"
+  (click)="_onButtonClick($event, parseInt(this.value) + 1)"
+>
+  <svg
+    appSvg
+    [src]="'/assets/images/icon-plus.svg'"
+  ></svg>
+</div>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
 @import 'style/layout-grid/mdc-layout-grid';
 @import './app/components/header/theme';
+@import './app/components/spinner/theme';
 
 * {
   box-sizing: border-box;
@@ -358,4 +359,5 @@ $theme-orange: (
   @include avatar($theme-orange);
   @include swiper($theme-orange);
   @include badge($theme-orange);
+  @include spinner($theme-orange);
 }
