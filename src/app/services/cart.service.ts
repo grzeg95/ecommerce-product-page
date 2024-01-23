@@ -66,7 +66,7 @@ export class CartService {
 
   removeProduct(id: number) {
     this._productsCart.update((productsCart) => {
-      return productsCart.filter((p) => p.id === id);
+      return productsCart.filter((p) => p.id !== id);
     });
   }
 
