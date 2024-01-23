@@ -2,7 +2,7 @@
 
   .app-nav {
 
-    .header__link {
+    &__link {
 
       color: map-get($theme, 'inactive');
 
@@ -17,7 +17,7 @@
       }
     }
 
-    .aside__link {
+    &__aside-link {
       color: map-get($theme, 'color');
     }
   }

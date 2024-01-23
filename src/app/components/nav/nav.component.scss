@@ -1,6 +1,6 @@
 .app-nav {
 
-  .header__link {
+  &__link {
 
     color: silver;
     text-decoration: none;
@@ -24,7 +24,7 @@
     }
   }
 
-  .aside__link {
+  &__aside-link {
     color: black;
     text-decoration: none;
     cursor: pointer;

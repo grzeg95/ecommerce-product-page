@@ -19,7 +19,7 @@
     @if (!isOnMediumAndBellow()) {
       <div class="d-flex gap-4 align-items-center">
         @for (link of links; track link) {
-          <a class="header__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
+          <a class="app-nav__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
         }
       </div>
     }
@@ -75,7 +75,7 @@
 
         <div class="d-flex flex-column gap-4">
           @for (link of links; track link) {
-            <a routerLink="/" class="aside__link" [routerLink]="link.link" (click)="isAsideShown.set(false)">{{ link.title }}</a>
+            <a routerLink="/" class="app-nav__aside-link" [routerLink]="link.link" (click)="isAsideShown.set(false)">{{ link.title }}</a>
           }
         </div>
 
