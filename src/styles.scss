@@ -295,7 +295,7 @@ svg {
   }
 }
 
-@mixin app-button-flat($theme) {
+@mixin button-flat($theme) {
 
   .app-button-flat {
 
@@ -330,7 +330,7 @@ $theme-orange: (
   @include swiper($theme-orange);
   @include badge($theme-orange);
   @include spinner($theme-orange);
-  @include app-items-catalog-details($theme-orange);
-  @include app-button-flat($theme-orange);
+  @include items-catalog-details($theme-orange);
+  @include button-flat($theme-orange);
   @include cart-widget($theme-orange);
 }
