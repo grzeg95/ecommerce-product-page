@@ -191,6 +191,20 @@ svg {
 .swiper-item-thumb__picture {
 
   border: solid 2px transparent;
+  cursor: pointer;
+
+  &:hover {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+    }
+  }
 
   &--active {
 
@@ -219,6 +233,12 @@ svg {
   .swiper-item-thumb__picture {
 
     border: solid 2px transparent;
+
+    &:hover {
+      &::before {
+        background: transparentize(map-get($theme, 'background'), 0.33);
+      }
+    }
 
     &--active {
 
