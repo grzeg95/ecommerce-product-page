@@ -43,6 +43,8 @@ export class NavComponent {
     return this._cartService.productsCart().reduce((value, product) => value + product.quantity, 0);
   });
 
+  isCartWidgetShown = this._cartService.isCartWidgetShown;
+
   links = [
     {
       link: '/collections',
@@ -70,5 +72,12 @@ export class NavComponent {
     private _breakpointsService: BreakpointsService,
     private _cartService: CartService
   ) {
+  }
+
+  openCartWidget(cartWidgetConnector: Element) {
+
+    if (!this.isCartWidgetShown()) {
+      this._cartService.openWidget(cartWidgetConnector);
+    }
   }
 }

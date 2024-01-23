@@ -1,4 +1,7 @@
-import {Injectable, signal} from '@angular/core';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {ComponentPortal} from '@angular/cdk/portal';
+import {ElementRef, Injectable, signal} from '@angular/core';
+import {CartWidgetComponent} from '../components/cart-widget/cart-widget.component';
 import {ProductCart} from '../models/product';
 import {ApiService} from './api.service';
 
@@ -13,8 +16,17 @@ export class CartService {
     return this._productsCart.asReadonly();
   }
 
+  private _cartWidgetOverlayRef?: OverlayRef;
+
+  private _isCartWidgetShown = signal(false);
+
+  get isCartWidgetShown() {
+    return this._isCartWidgetShown.asReadonly();
+  }
+
   constructor(
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private overlay: Overlay
   ) { }
 
   async addProduct(id: number, quantity: number) {
@@ -85,5 +97,37 @@ export class CartService {
 
       return _productsCart;
     });
+  }
+
+  async openWidget(cartWidgetConnector: Element | ElementRef) {
+
+    this._cartWidgetOverlayRef?.detach();
+
+    const overlayPosition = this.overlay.position().flexibleConnectedTo(cartWidgetConnector).withPositions([
+      {originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top'}
+    ]);
+
+    if (!this._cartWidgetOverlayRef) {
+      this._cartWidgetOverlayRef = this.overlay.create({
+        positionStrategy: overlayPosition,
+        width: '100%',
+        maxWidth: '362px'
+      });
+
+      this._cartWidgetOverlayRef.outsidePointerEvents().subscribe(() => this.closeWidget());
+    }
+
+    this.updateCart();
+
+    const cartWidgetComponentPortal = new ComponentPortal(CartWidgetComponent);
+    this._cartWidgetOverlayRef.attach(cartWidgetComponentPortal);
+    this._isCartWidgetShown.set(true);
+  }
+
+  closeWidget() {
+    if (this._cartWidgetOverlayRef) {
+      this._cartWidgetOverlayRef.detach();
+      setTimeout(() => this._isCartWidgetShown.set(false));
+    }
   }
 }

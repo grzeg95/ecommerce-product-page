@@ -2,6 +2,7 @@
 @import 'app/components/nav/theme';
 @import './app/components/spinner/theme';
 @import './app/components/items-catalog-details/theme';
+@import 'app/components/cart-widget/theme';
 
 * {
   box-sizing: border-box;
@@ -331,4 +332,5 @@ $theme-orange: (
   @include spinner($theme-orange);
   @include app-items-catalog-details($theme-orange);
   @include app-button-flat($theme-orange);
+  @include cart-widget($theme-orange);
 }

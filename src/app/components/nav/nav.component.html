@@ -1,4 +1,4 @@
-<nav class="p-4 d-flex justify-content-between align-items-center w-100">
+<nav #cartWidgetConnector class="p-4 d-flex justify-content-between align-items-center w-100">
 
   <div class="d-flex align-items-center" [ngClass]="isOnMediumAndBellow() ? 'gap-3' : 'gap-5'">
 
@@ -28,18 +28,18 @@
 
   <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
 
-    <div class="d-flex position-relative">
+    <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)">
       <svg
         appSvg
         class="icon"
         appHoverClasses="icon--active"
-        [class.icon--active-2]="cartItemsLength()"
+        [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
         [src]="'/assets/images/icon-cart.svg'"
         [class.icon__big]="!isOnMediumAndBellow()"
       />
 
       @if (cartItemsLength()) {
-        <div class="badge" [class.badge__big]="!isOnMediumAndBellow()">{{ cartItemsLength() }}</div>
+        <div class="badge" role="button" [class.badge__big]="!isOnMediumAndBellow()">{{ cartItemsLength() }}</div>
       }
     </div>
 
