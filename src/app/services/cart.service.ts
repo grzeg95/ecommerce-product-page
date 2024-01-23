@@ -68,6 +68,8 @@ export class CartService {
     this._productsCart.update((productsCart) => {
       return productsCart.filter((p) => p.id !== id);
     });
+
+    this.updateCart();
   }
 
   async updateCart() {
