@@ -75,6 +75,6 @@ export class ItemsCatalogDetailsComponent implements OnInit {
   }
 
   protected async addProduct() {
-    await this._cartService.addProduct(this.product!.id, parseInt(this.quantity));
+    this._cartService.addProduct(this.product!.id, parseInt(this.quantity));
   }
 }
