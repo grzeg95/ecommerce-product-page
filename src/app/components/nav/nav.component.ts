@@ -9,7 +9,7 @@ import {BreakpointsService} from '../../services/breakpoints.service';
 import {CartService} from '../../services/cart.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-nav',
   standalone: true,
   imports: [
     NgClass,
@@ -18,19 +18,19 @@ import {CartService} from '../../services/cart.service';
     HoverClassesDirective,
     RouterLinkActive
   ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  templateUrl: './nav.component.html',
+  styleUrl: './nav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'app-header d-block mx-auto mw'
+    class: 'app-nav d-block mx-auto mw'
   },
   animations: [
     slideInOutFromLeft,
     fadeInOut
   ]
 })
-export class HeaderComponent {
+export class NavComponent {
 
   isAsideShown = signal<boolean>(false);
 

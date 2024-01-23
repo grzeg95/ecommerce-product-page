@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
-@import 'app/components/header/theme';
+@import 'app/components/nav/theme';
 @import './app/components/spinner/theme';
 @import './app/components/items-catalog-details/theme';
 
@@ -322,7 +322,7 @@ $theme-orange: (
 
 .orange {
   @include container($theme-orange);
-  @include header($theme-orange);
+  @include nav($theme-orange);
   @include icon($theme-orange);
   @include hr($theme-orange);
   @include avatar($theme-orange);

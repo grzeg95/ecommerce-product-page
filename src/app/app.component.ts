@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {HeaderComponent} from './components/header/header.component';
+import {NavComponent} from './components/nav/nav.component';
 import {ItemsCatalogDetailsComponent} from './components/items-catalog-details/items-catalog-details.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    HeaderComponent,
+    NavComponent,
     ItemsCatalogDetailsComponent
   ],
   templateUrl: './app.component.html',
