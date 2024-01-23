@@ -246,6 +246,7 @@ svg {
   padding: 1px;
   box-sizing: content-box;
   border-radius: 15px;
+  user-select: none;
 
   &__big {
     min-width: 15px;
