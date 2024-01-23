@@ -1,8 +1,7 @@
-import {HttpClient} from '@angular/common/http';
 import {ChangeDetectorRef, Directive, ElementRef, HostBinding, Input, OnChanges, Renderer2} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {Subject, switchMap} from 'rxjs';
-import {DomPurifyService} from '../services/dom-purify.service';
+import {Subject} from 'rxjs';
+import {SvgService} from '../services/svg.service';
 
 @Directive({
   selector: '[appSvg]',
@@ -10,45 +9,32 @@ import {DomPurifyService} from '../services/dom-purify.service';
 })
 export class SvgDirective implements OnChanges {
 
-  @Input() src!: string;
+  @Input({required: true}) name!: string;
   @Input() @HostBinding('attr.aria-label') arialLabel!: string;
 
-  private _onChanges = new Subject();
+  private _onChanges = new Subject<SVGElement | undefined>();
 
   constructor(
     private _el: ElementRef,
-    private _http: HttpClient,
     private _cdr: ChangeDetectorRef,
-    private _domPurifyService: DomPurifyService,
-    private _renderer: Renderer2
+    private _renderer: Renderer2,
+    private _svgService: SvgService
   ) {
     this._onChanges.pipe(
-      takeUntilDestroyed(),
-      switchMap(() => {
-        return this._http.get(this.src, {responseType: 'text'})
-      })
-    ).subscribe((text) => {
+      takeUntilDestroyed()
+    ).subscribe((svg) => {
+
+      if (!svg) {
+        return;
+      }
 
       const nativeElement: HTMLElement = this._el.nativeElement
-
       nativeElement.innerHTML = '';
 
-      const temp = document.createElement('template');
-      temp.innerHTML = this._domPurifyService.sanitize(text);
-
-      const svg = temp.content.childNodes.item(0) as SVGElement;
-
       if (!svg.hasAttribute('viewBox')) {
-
         if (svg.hasAttribute('width') && svg.hasAttribute('height')) {
           this._renderer.setAttribute(nativeElement, 'viewBox', `0 0 ${svg.getAttribute('width')} ${svg.getAttribute('height')}`);
-          this._renderer.removeAttribute(svg, 'width');
-          this._renderer.removeAttribute(svg, 'height');
         }
-
-      } else {
-        this._renderer.removeAttribute(svg, 'width');
-        this._renderer.removeAttribute(svg, 'height');
       }
 
       // copy all attributes
@@ -60,7 +46,7 @@ export class SvgDirective implements OnChanges {
       // append all elements
 
       svg.childNodes.forEach((node) => {
-        this._renderer.appendChild(nativeElement, node);
+        this._renderer.appendChild(nativeElement, node.cloneNode());
       });
 
       this._cdr.markForCheck();
@@ -68,6 +54,6 @@ export class SvgDirective implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this._onChanges.next(this.src);
+    this._onChanges.next(this._svgService.getSvg(this.name));
   }
 }

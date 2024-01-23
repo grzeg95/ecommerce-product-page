@@ -7,7 +7,7 @@
       @if (isOnMediumAndBellow()) {
         <svg
           appSvg
-          [src]="'/assets/images/icon-menu.svg'"
+          name="icon-menu"
           class="icon"
           appHoverClasses="icon--active"
           (click)="isAsideShown.set(true)"
@@ -36,7 +36,7 @@
           class="icon"
           appHoverClasses="icon--active"
           [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
-          [src]="'/assets/images/icon-cart.svg'"
+          name="icon-cart"
           [class.icon__big]="!isOnMediumAndBellow()"
         />
 
@@ -73,7 +73,7 @@
           appSvg
           class="icon"
           appHoverClasses="icon--active"
-          [src]="'/assets/images/icon-close.svg'"
+          name="icon-close"
           arialLabel="Close mobile menu"
           [class.icon__big]="!isOnMediumAndBellow()"
           (click)="isAsideShown.set(false)"

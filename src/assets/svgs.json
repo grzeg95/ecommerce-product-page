@@ -1,0 +1,38 @@
+[
+  {
+    "name": "icon-cart",
+    "src": "/assets/images/icon-cart.svg"
+  },
+  {
+    "name": "icon-close",
+    "src": "/assets/images/icon-close.svg"
+  },
+  {
+    "name": "icon-delete",
+    "src": "/assets/images/icon-delete.svg"
+  },
+  {
+    "name": "icon-menu",
+    "src": "/assets/images/icon-menu.svg"
+  },
+  {
+    "name": "icon-minus",
+    "src": "/assets/images/icon-minus.svg"
+  },
+  {
+    "name": "icon-next",
+    "src": "/assets/images/icon-next.svg"
+  },
+  {
+    "name": "icon-plus",
+    "src": "/assets/images/icon-plus.svg"
+  },
+  {
+    "name": "icon-previous",
+    "src": "/assets/images/icon-previous.svg"
+  },
+  {
+    "name": "logo",
+    "src": "/assets/images/logo.svg"
+  }
+]
