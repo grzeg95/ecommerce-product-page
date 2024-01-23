@@ -61,7 +61,7 @@ export class CartService {
       return productsCart;
     });
 
-    await this.updateCart();
+    this.updateCart();
   }
 
   removeProduct(id: number) {
