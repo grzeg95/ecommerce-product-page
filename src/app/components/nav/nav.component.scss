@@ -1,5 +1,10 @@
 .app-nav {
 
+  &__nav-wrapper {
+    width: 100%;
+    background: white;
+  }
+
   &__link {
 
     color: silver;

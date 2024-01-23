@@ -8,9 +8,15 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: 'Kumbh Sans', sans-serif;
+  overflow: auto;
+  height: 100vh;
 }
 
 .mw {

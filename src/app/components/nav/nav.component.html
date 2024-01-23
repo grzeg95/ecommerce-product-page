@@ -1,57 +1,63 @@
-<nav #cartWidgetConnector class="p-4 d-flex justify-content-between align-items-center w-100">
+<div class="app-nav__nav-wrapper position-fixed z-2" #navWrapper>
 
-  <div class="d-flex align-items-center" [ngClass]="isOnMediumAndBellow() ? 'gap-3' : 'gap-5'">
+  <nav #cartWidgetConnector class="p-4 d-flex justify-content-between align-items-center">
 
-    @if (isOnMediumAndBellow()) {
-      <svg
-        appSvg
-        [src]="'/assets/images/icon-menu.svg'"
-        class="icon"
-        appHoverClasses="icon--active"
-        (click)="isAsideShown.set(true)"
-      ></svg>
-    }
+    <div class="d-flex align-items-center" [ngClass]="isOnMediumAndBellow() ? 'gap-3' : 'gap-5'">
 
-    <a aria-label="Home" routerLink="/" class="header__logo">
-      <img src="/assets/images/logo.svg" alt="Logo" />
-    </a>
+      @if (isOnMediumAndBellow()) {
+        <svg
+          appSvg
+          [src]="'/assets/images/icon-menu.svg'"
+          class="icon"
+          appHoverClasses="icon--active"
+          (click)="isAsideShown.set(true)"
+        ></svg>
+      }
 
-    @if (!isOnMediumAndBellow()) {
-      <div class="d-flex gap-4 align-items-center">
-        @for (link of links; track link) {
-          <a class="app-nav__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
+      <a aria-label="Home" routerLink="/" class="header__logo">
+        <img src="/assets/images/logo.svg" alt="Logo" />
+      </a>
+
+      @if (!isOnMediumAndBellow()) {
+        <div class="d-flex gap-4 align-items-center">
+          @for (link of links; track link) {
+            <a class="app-nav__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
+          }
+        </div>
+      }
+
+    </div>
+
+    <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
+
+      <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)">
+        <svg
+          appSvg
+          class="icon"
+          appHoverClasses="icon--active"
+          [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
+          [src]="'/assets/images/icon-cart.svg'"
+          [class.icon__big]="!isOnMediumAndBellow()"
+        />
+
+        @if (cartItemsLength()) {
+          <div class="badge" role="button" [class.badge__big]="!isOnMediumAndBellow()">{{ cartItemsLength() }}</div>
         }
       </div>
-    }
 
-  </div>
+      <div class="d-flex">
+        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png">
+      </div>
 
-  <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
-
-    <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)">
-      <svg
-        appSvg
-        class="icon"
-        appHoverClasses="icon--active"
-        [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
-        [src]="'/assets/images/icon-cart.svg'"
-        [class.icon__big]="!isOnMediumAndBellow()"
-      />
-
-      @if (cartItemsLength()) {
-        <div class="badge" role="button" [class.badge__big]="!isOnMediumAndBellow()">{{ cartItemsLength() }}</div>
-      }
     </div>
 
-    <div class="d-flex">
-      <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png">
-    </div>
+  </nav>
 
-  </div>
+  <hr class="m-0"/>
 
-</nav>
+</div>
 
-<hr class="m-0"/>
+<div #spacer></div>
 
 @if (isAsideShown() && isOnMediumAndBellow()) {
 
