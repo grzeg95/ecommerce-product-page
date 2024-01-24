@@ -11,11 +11,25 @@
   </swiper-container>
 
   @if (images.normal.length > 1) {
-    <div role="button" tabindex="0" class="swiper-button-prev" [class.swiper-button-disabled]="_activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()" (keydown)="handleKeydownOnSwiperButton($event, appSwiper.swiper.slidePrev)">
+    <div
+      class="swiper-button-prev"
+      [class.swiper-button-disabled]="_activeIndex() === 0"
+      [tabindex]="_activeIndex() === 0 ? -1 : 0"
+      role="button"
+      (click)="appSwiper.swiper.slidePrev()"
+      (keydown)="handleKeydownOnSwiperButtonPrev($event)"
+    >
       <svg appSvg name="icon-previous"></svg>
     </div>
 
-    <div role="button" tabindex="0" class="swiper-button-next" [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1" (click)="appSwiper.swiper.slideNext()" (keydown)="handleKeydownOnSwiperButton($event, appSwiper.swiper.slideNext)">
+    <div
+      class="swiper-button-next"
+      [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1"
+      [tabindex]="_activeIndex() === images.normal.length - 1 ? -1 : 0"
+      role="button"
+      (click)="appSwiper.swiper.slideNext()"
+      (keydown)="handleKeydownOnSwiperButtonNext($event)"
+    >
       <svg appSvg name="icon-next"></svg>
     </div>
   }

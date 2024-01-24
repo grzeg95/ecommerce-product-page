@@ -1,11 +1,11 @@
-import {NgClass} from '@angular/common';
+import {DOCUMENT, NgClass} from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
-  HostListener,
+  HostListener, Inject,
   Renderer2,
   signal,
   ViewChild,
@@ -101,6 +101,7 @@ export class NavComponent implements AfterViewInit {
     private _cartService: CartService,
     private _renderer: Renderer2,
     private _el: ElementRef<HTMLElement>,
+    @Inject(DOCUMENT) private document: Document
   ) {
   }
 
@@ -124,15 +125,29 @@ export class NavComponent implements AfterViewInit {
     }
   }
 
-  handleKeydownOnDrop($event: KeyboardEvent) {
-    if ($event.code === 'Enter' || $event.code === 'Space') {
-      this.isAsideShown.set(false);
+  handleCartKeydown($event: KeyboardEvent) {
+
+    if ($event.code === 'Enter') {
+
+      if (this.isCartWidgetShown()) {
+        this._cartService.closeWidget();
+      } else {
+        this.openCartWidget(this.cartWidgetConnector!.nativeElement!);
+      }
     }
   }
 
-  handleCartKeydown($event: KeyboardEvent) {
-    if ($event.code === 'Enter' || $event.code === 'Space') {
-      this.openCartWidget(this.cartWidgetConnector!.nativeElement!);
+  handleAsideMenuKeydown($event: KeyboardEvent) {
+
+    if ($event.code === 'Enter') {
+      this.isAsideShown.set(true);
+      ((document.activeElement) as any)?.blur();
+    }
+  }
+
+  handleKeydownCloseAside($event: KeyboardEvent) {
+    if ($event.code === 'Enter') {
+      this.isAsideShown.set(false);
     }
   }
 }

@@ -96,9 +96,15 @@ export class ProductImageGalleryComponent {
     this.activeIndexChange.emit(activeIndex);
   }
 
-  handleKeydownOnSwiperButton($event: KeyboardEvent, callback: () => void) {
-    if ($event.code === 'Enter' || $event.code === 'Space') {
-      callback();
+  handleKeydownOnSwiperButtonPrev($event: KeyboardEvent) {
+    if ($event.code === 'Enter') {
+      this.appSwiper.nativeElement.swiper.slidePrev();
+    }
+  }
+
+  handleKeydownOnSwiperButtonNext($event: KeyboardEvent) {
+    if ($event.code === 'Enter') {
+      this.appSwiper.nativeElement.swiper.slideNext();
     }
   }
 }

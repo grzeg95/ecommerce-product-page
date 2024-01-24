@@ -11,7 +11,7 @@
     <div class="d-flex flex-column">
 
       @for(productCart of productsCart(); track productCart) {
-        <div class="d-flex gap-2 w-100 p-4 pb-0">
+        <div class="d-flex align-items-center gap-2 w-100 p-4 pb-0">
           <img class="app-cart-widget__product-img d-block" [src]="productCart.image" alt="Product Image">
           <div class="d-flex flex-column justify-content-center overflow-hidden">
             <div class="app-cart-widget__product-name">{{ productCart.name }}</div>
@@ -20,13 +20,18 @@
               <span class="fw-bold app-cart-widget__price-calc-right">${{ times(productCart.pricePlan.price, productCart.quantity) | number : '1.2' }}</span>
             </div>
           </div>
-          <div class="d-flex align-items-center ms-auto">
+          <div
+            class="d-flex"
+            tabindex="0"
+            (click)="removeProduct(productCart.id)"
+            (keydown)="handleKeydownRemoveProduct($event, productCart.id)"
+            [attr.aria-label]="'Remove Products'"
+          >
             <svg
-              class="icon d-block"
               appSvg
               name="icon-delete"
+              class="icon"
               appHoverClasses="icon--active"
-              (click)="removeProduct(productCart.id)"
             ></svg>
           </div>
         </div>
