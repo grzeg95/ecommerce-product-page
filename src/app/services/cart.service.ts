@@ -84,7 +84,7 @@ export class CartService {
 
       for (let i = 0; i < products.length; ++i) {
 
-        let product = products[i];
+        const product = products[i];
 
         if (product) {
           _productsCart.push({
