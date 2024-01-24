@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable, Renderer2, RendererFactory2} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {tap} from 'rxjs';
 import {DomPurifyService} from './dom-purify.service';
 
@@ -10,14 +10,10 @@ export class SvgService {
 
   private _svgs = new Map<string, SVGElement>();
 
-  private _renderer: Renderer2;
-
   constructor(
     private _http: HttpClient,
-    private _domPurifyService: DomPurifyService,
-    private _rendererFactory: RendererFactory2
+    private _domPurifyService: DomPurifyService
   ) {
-    this._renderer = this._rendererFactory.createRenderer(null, null);
   }
 
   getSvg(name: string) {
