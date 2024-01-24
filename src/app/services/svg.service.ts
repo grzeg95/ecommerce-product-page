@@ -17,7 +17,7 @@ export class SvgService {
   }
 
   getSvg(name: string) {
-    return this._svgs.get(name);
+    return this._svgs.get(name)?.cloneNode(true) as SVGElement | undefined;
   }
 
   registerSvg(src: string, name: string) {
