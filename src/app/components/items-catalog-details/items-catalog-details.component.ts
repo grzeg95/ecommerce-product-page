@@ -116,7 +116,7 @@ export class ItemsCatalogDetailsComponent implements OnInit {
     componentInstance.activeIndex = this.galleryActiveIndex;
   }
 
-  protected async addProduct() {
+  protected addProduct() {
     this._cartService.addProduct(this.product!.id, parseInt(this.quantity));
   }
 }
