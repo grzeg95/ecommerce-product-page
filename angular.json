@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "e-commerce-product-page": {
+    "ecommerce-product-page": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/e-commerce-product-page",
+            "outputPath": "dist/ecommerce-product-page",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "e-commerce-product-page:build:production"
+              "buildTarget": "ecommerce-product-page:build:production"
             },
             "development": {
-              "buildTarget": "e-commerce-product-page:build:development"
+              "buildTarget": "ecommerce-product-page:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "e-commerce-product-page:build"
+            "buildTarget": "ecommerce-product-page:build"
           }
         },
         "test": {
