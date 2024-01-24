@@ -1,0 +1,14 @@
+.app-product-catalog-gallery-fullscreen {
+
+  &--hidden {
+    opacity: 0;
+  }
+
+  .swiper-button-prev {
+    left: -6%;
+  }
+
+  .swiper-button-next {
+    right: -6%;
+  }
+}

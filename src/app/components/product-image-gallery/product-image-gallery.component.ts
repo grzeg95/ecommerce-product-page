@@ -34,6 +34,7 @@ export class ProductImageGalleryComponent {
 
   @Input({required: true}) images!: {normal: string[]; thumb: string[]};
   @Output() activeIndexChange = new EventEmitter<number>();
+  @Output() clickNormal = new EventEmitter<void>();
   @ViewChild('appSwiper') protected appSwiper!: ElementRef<SwiperContainer>;
   @ViewChild('appSwiperThumbs') protected appSwiperThumbs!: ElementRef<SwiperContainer>;
   @ViewChild('swiperButtonPrev') protected swiperButtonPrev!: ElementRef<HTMLDivElement>;

@@ -9,7 +9,7 @@
 
       @if (!isOnExtraSmallAndBellow()) {
         <div class="col-md-6 col-lg-5">
-          <app-product-image-gallery [(activeIndex)]="galleryActiveIndex" [images]="product.images"/>
+          <app-product-image-gallery #appProductImageGallery [(activeIndex)]="galleryActiveIndex" [images]="product.images" (clickNormal)="!isOnSmallAndBellow() && showFullscreenGallery()"/>
         </div>
       }
 
