@@ -1,0 +1,40 @@
+<div class="d-flex flex-column">
+  <div class="app-cart-widget__cart-title fs-6 fw-bold p-4">Cart</div>
+  <hr class="m-0"/>
+</div>
+
+<div class="d-flex flex-column">
+
+  @if(productsCart().length === 0) {
+    <div class="p-5 app-cart-widget__cart-empty fs-6 text-center">Your cart is empty.</div>
+  } @else {
+    <div class="d-flex flex-column">
+
+      @for(productCart of productsCart(); track productCart) {
+        <div class="d-flex gap-2 w-100 p-4 pb-0">
+          <img class="app-cart-widget__product-img d-block" [src]="productCart.image" alt="Product Image">
+          <div class="d-flex flex-column justify-content-center overflow-hidden">
+            <div class="app-cart-widget__product-name">{{ productCart.name }}</div>
+            <div class="app-cart-widget__product-price">
+              <span class="app-cart-widget__price-calc-left">${{ productCart.pricePlan.price | number : '1.2' }} x {{ productCart.quantity }} </span>
+              <span class="fw-bold app-cart-widget__price-calc-right">${{ times(productCart.pricePlan.price, productCart.quantity) | number : '1.2' }}</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-center ms-auto">
+            <svg
+              class="icon d-block"
+              appSvg
+              name="icon-delete"
+              appHoverClasses="icon--active"
+              (click)="removeProduct(productCart.id)"
+            ></svg>
+          </div>
+        </div>
+      }
+
+      <div class="d-flex w-100 p-4 justify-content-between">
+        <button class="app-button-flat w-100" (click)="goToCheckout()">Checkout</button>
+      </div>
+    </div>
+  }
+</div>

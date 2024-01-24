@@ -1,0 +1,93 @@
+<div class="app-nav__nav-wrapper position-fixed z-2" #navWrapper>
+
+  <nav #cartWidgetConnector class="p-4 d-flex justify-content-between align-items-center">
+
+    <div class="d-flex align-items-center" [ngClass]="isOnMediumAndBellow() ? 'gap-3' : 'gap-5'">
+
+      @if (isOnMediumAndBellow()) {
+        <svg
+          appSvg
+          name="icon-menu"
+          class="icon"
+          appHoverClasses="icon--active"
+          (click)="isAsideShown.set(true)"
+        ></svg>
+      }
+
+      <a aria-label="Home" routerLink="/" class="app-nav__logo">
+        <svg appSvg name="logo"></svg>
+      </a>
+
+      @if (!isOnMediumAndBellow()) {
+        <div class="d-flex gap-4 align-items-center">
+          @for (link of links; track link) {
+            <a class="app-nav__link" [routerLinkActive]="link.link" [routerLink]="link.link">{{ link.title }}</a>
+          }
+        </div>
+      }
+
+    </div>
+
+    <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
+
+      <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)" (keydown)="handleCartKeydown($event)" tabindex="0">
+        <svg
+          appSvg
+          class="icon"
+          appHoverClasses="icon--active"
+          [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
+          name="icon-cart"
+          [class.icon__big]="!isOnMediumAndBellow()"
+        />
+
+        @if (cartItemsLength()) {
+          <div class="badge" role="button" [class.badge__big]="!isOnMediumAndBellow()">{{ cartItemsLength() }}</div>
+        }
+      </div>
+
+      <div class="d-flex">
+        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png" alt="Avatar">
+      </div>
+
+    </div>
+
+  </nav>
+
+  <hr class="m-0"/>
+
+</div>
+
+<div #spacer></div>
+
+@if (isAsideShown() && isOnMediumAndBellow()) {
+
+  <div class="fixed-top w-100 h-100 background__drop z-2" tabindex="0" [@fadeInOut]="" (click)="isAsideShown.set(false)" (keydown)="handleKeydownOnDrop($event)"></div>
+
+  <aside class="width-px-250 h-100 fixed-top z-2" [@slideInOutFromLeft]="">
+
+    <div class="p-4 m-0 h-100 background">
+
+      <div class="d-flex flex-column gap-5">
+
+        <svg
+          appSvg
+          class="icon"
+          appHoverClasses="icon--active"
+          name="icon-close"
+          arialLabel="Close mobile menu"
+          [class.icon__big]="!isOnMediumAndBellow()"
+          (click)="isAsideShown.set(false)"
+        />
+
+        <div class="d-flex flex-column gap-4">
+          @for (link of links; track link) {
+            <a routerLink="/" class="app-nav__aside-link" [routerLink]="link.link" (click)="isAsideShown.set(false)">{{ link.title }}</a>
+          }
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+}

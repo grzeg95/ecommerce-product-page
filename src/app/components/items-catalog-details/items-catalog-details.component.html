@@ -1,0 +1,64 @@
+@if (product) {
+
+  @if (isOnExtraSmallAndBellow()) {
+    <app-product-image-gallery [(activeIndex)]="galleryActiveIndex" [images]="product.images"/>
+  }
+
+  <div class="container mw">
+    <div class="row justify-content-around">
+
+      @if (!isOnExtraSmallAndBellow()) {
+        <div class="col-md-6 col-lg-5">
+          <app-product-image-gallery #appProductImageGallery [(activeIndex)]="galleryActiveIndex" [images]="product.images" (clickNormal)="!isOnSmallAndBellow() && showFullscreenGallery()"/>
+        </div>
+      }
+
+      <div class="col-12 mt-4 mt-md-0 col-md-6 col-lg-5">
+        <div class="d-flex flex-column h-100 justify-content-center">
+
+          <div class="company-name fs-small fw-bold">{{ product.company }}</div>
+          <div class="name mt-2 fs-3 fw-bold">{{ product.name }}</div>
+          <div class="description lh-base mt-2">{{ product.description }}</div>
+
+          <div class="d-flex flex-md-column justify-content-between align-items-center align-items-md-start mt-3">
+
+            <div class="d-flex align-items-center gap-3">
+              <span class="price fw-bold fs-3">${{ product.pricePlan.price | number : '1.2' }}</span>
+
+              @if (product.pricePlan.discount) {
+                <span class="discount pt-1 pb-1 ps-2 pe-2 fw-bold rounded-3">{{ product.pricePlan.discount }}%</span>
+              }
+            </div>
+
+            @if (product.pricePlan.discount) {
+              <div class="old-price fw-bold">
+                <del>${{ div(times(product.pricePlan.price, 100), product.pricePlan.discount) | number : '1.2' }}</del>
+              </div>
+            }
+
+          </div>
+
+          <div class="d-flex flex-column flex-md-row justify-content-between mt-3">
+
+            <div class="col-12 col-md-4">
+              <app-spinner [(ngModel)]="quantity" [min]="1" [max]="10" />
+            </div>
+
+            <div class="col-12 col-md-7 mt-3 mt-md-0">
+              <button class="app-button-flat w-100" (click)="addProduct()">
+                <svg
+                  class="app-button-flat__icon"
+                  appSvg
+                  name="icon-cart"
+                ></svg>
+                <span>Add to cart</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+}

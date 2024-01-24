@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {NavComponent} from './components/nav/nav.component';
+import {ItemsCatalogDetailsComponent} from './components/items-catalog-details/items-catalog-details.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [
+    NavComponent,
+    ItemsCatalogDetailsComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'e-commerce-product-page';
 }

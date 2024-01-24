@@ -1,0 +1,28 @@
+@mixin nav($theme) {
+
+  .app-nav {
+
+    &__wrapper {
+      background: map-get($theme, 'background');
+    }
+
+    &__link {
+
+      color: map-get($theme, 'inactive');
+
+      &:hover {
+
+        color: map-get($theme, 'color');
+
+        &::before {
+          background: map-get($theme, 'primary');
+        }
+
+      }
+    }
+
+    &__aside-link {
+      color: map-get($theme, 'color');
+    }
+  }
+}

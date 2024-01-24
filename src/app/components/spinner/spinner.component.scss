@@ -1,0 +1,27 @@
+.app-spinner {
+
+  background: silver;
+
+  &__button {
+
+    width: 12px;
+    box-sizing: content-box;
+
+    path {
+      fill: black !important;
+    }
+
+    &--disabled {
+
+      pointer-events: none;
+
+      path {
+        fill: dimgray !important;
+      }
+    }
+  }
+
+  &__value {
+    color: black;
+  }
+}

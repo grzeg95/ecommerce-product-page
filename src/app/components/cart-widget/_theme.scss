@@ -1,0 +1,27 @@
+@mixin cart-widget($theme) {
+
+  .app-cart-widget {
+
+    background: map-get($theme, 'background');
+
+    &__cart-title {
+      color: map-get($theme, 'color');
+    }
+
+    &__cart-empty {
+      color: map-get($theme, 'inactive');
+    }
+
+    &__product-name {
+      color: map-get($theme, 'inactive');
+    }
+
+    &__price-calc-left {
+      color: map-get($theme, 'inactive');
+    }
+
+    &__price-calc-right {
+      color: map-get($theme, 'color');
+    }
+  }
+}

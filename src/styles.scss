@@ -1,1 +1,368 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
+@import 'app/components/nav/theme';
+@import 'app/components/spinner/theme';
+@import 'app/components/items-catalog-details/theme';
+@import 'app/components/cart-widget/theme';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Kumbh Sans', sans-serif;
+  overflow: auto;
+  height: 100vh;
+}
+
+.mw {
+
+  @media (min-width: 768px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1110px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1110px;
+  }
+}
+
+.fs-small {
+  font-size: 0.75rem !important;
+}
+
+@mixin container($theme) {
+  background: map-get($theme, 'background');
+  color: map-get($theme, 'color');
+}
+
+.icon {
+
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+
+  path {
+    fill: silver !important;
+  }
+
+  &--active, &--active-2 {
+    path {
+      fill: black !important;
+    }
+  }
+
+  &__big {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@mixin icon($theme) {
+  .icon {
+
+    path {
+      fill: map-get($theme, 'inactive') !important;
+    }
+
+    &--active, &--active-2 {
+      path {
+        fill: map-get($theme, 'color') !important;
+      }
+    }
+  }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: silver
+}
+
+@mixin hr($theme) {
+  hr {
+    background: map-get($theme, 'hr');
+  }
+}
+
+.avatar {
+
+  width: 1.5rem;
+  height: 1.5rem;
+  user-select: none;
+
+  &--big {
+    width: 3.125rem;
+    height: 3.125rem;
+  }
+
+  &-header {
+
+    border: solid 2px transparent;
+    border-radius: 100%;
+    box-sizing: content-box;
+    cursor: pointer;
+
+    &:hover {
+      border: solid 2px silver;
+    }
+
+  }
+}
+
+@mixin avatar($theme) {
+  .avatar {
+
+    &-header {
+
+      &:hover {
+        border: solid 2px map-get($theme, 'primary');
+      }
+    }
+  }
+}
+
+.width-px-250 {
+  width: 250px;
+}
+
+.background {
+
+  background: white;
+
+  &__drop {
+    background: rgba(0, 0, 0, 0.75);
+  }
+}
+
+@mixin background($theme) {
+  .background {
+
+    background: map-get($theme, 'background');
+
+    &__drop {
+      background: map-get($theme, 'background-drop');
+    }
+  }
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10%;
+  height: 10%;
+  z-index: 1;
+  border-radius: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 2%;
+  user-select: none;
+
+  svg {
+    width: 25%;
+  }
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.swiper-item-thumb__picture {
+
+  border: solid 2px transparent;
+  cursor: pointer;
+
+  &:hover {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+    }
+  }
+
+  &--active {
+
+    border: solid 2px black;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+    }
+  }
+}
+
+@mixin swiper($theme) {
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: map-get($theme, 'background');
+  }
+
+  .swiper-item-thumb__picture {
+
+    border: solid 2px transparent;
+
+    &:hover {
+      &::before {
+        background: transparentize(map-get($theme, 'background'), 0.33);
+      }
+    }
+
+    &--active {
+
+      border: solid 2px map-get($theme, 'primary');
+
+      &::before {
+        background: transparentize(map-get($theme, 'background'), 0.33);
+      }
+    }
+  }
+}
+
+.badge {
+
+  min-width: 13px;
+  height: 13px;
+  background: tomato;
+  color: white;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px;
+  box-sizing: content-box;
+  border-radius: 15px;
+  user-select: none;
+
+  &__big {
+    min-width: 15px;
+    height: 15px;
+    font-size: 0.75rem;
+  }
+}
+
+@mixin badge($theme) {
+
+  .badge {
+    background: map-get($theme, 'primary');
+    color: map-get($theme, 'background');
+  }
+}
+
+.app-button-flat {
+
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  background: black;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 14px;
+  width: fit-content;
+  align-items: center;
+
+  &:hover {
+    background: dimgray;
+  }
+
+  &__icon {
+
+    color: white;
+    width: 18px;
+
+    path {
+      fill: white !important;
+    }
+  }
+}
+
+@mixin button-flat($theme) {
+
+  .app-button-flat {
+
+    color: map-get($theme, 'background');
+    background: map-get($theme, 'primary');
+
+    &:hover {
+      color: map-get($theme, 'background');
+      background: transparentize(map-get($theme, 'primary'), 0.4);
+    }
+  }
+}
+
+.cdk-dialog-container {
+  outline: none !important;
+}
+
+$theme-orange: (
+  'primary': hsl(26, 100%, 55%),
+  'secondary': hsl(25, 100%, 94%),
+  'color': hsl(220, 13%, 13%),
+  'inactive': hsl(219, 9%, 45%),
+  'old': hsl(220, 14%, 75%),
+  'hr': #E8E7EC,
+  'accent': hsl(223, 64%, 98%),
+  'background': hsl(0, 0%, 100%),
+  'background-drop':  opacify(hsl(0, 0%, 0%), 0.75)
+);
+
+.orange {
+  @include container($theme-orange);
+  @include nav($theme-orange);
+  @include icon($theme-orange);
+  @include hr($theme-orange);
+  @include avatar($theme-orange);
+  @include swiper($theme-orange);
+  @include badge($theme-orange);
+  @include spinner($theme-orange);
+  @include items-catalog-details($theme-orange);
+  @include button-flat($theme-orange);
+  @include cart-widget($theme-orange);
+}
