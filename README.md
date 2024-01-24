@@ -45,6 +45,7 @@ Users should be able to:
 
 ### What I learned
 
+- Run build before merge pull request
 - Swiper
 - Bootstrap Flex, Fonts, Spacing
 - DOMPurify
