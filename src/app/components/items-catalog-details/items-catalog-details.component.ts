@@ -51,7 +51,7 @@ import {SpinnerComponent} from '../spinner/spinner.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'app-items-catalog-details d-block mt-0 mt-sm-4 mt-lg-5'
+    class: 'app-items-catalog-details d-block mt-0 mb-4 mt-sm-4 mt-lg-5 mb-lg-5'
   }
 })
 export class ItemsCatalogDetailsComponent implements OnInit {
