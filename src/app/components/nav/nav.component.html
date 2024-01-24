@@ -76,7 +76,7 @@
 
 @if (isAsideShown() && isOnMediumAndBellow()) {
 
-  <div class="fixed-top w-100 h-100 background__drop z-2" tabindex="-1" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
+  <div class="fixed-top w-100 h-100 background__drop z-2" tabindex="-1" [@fadeInOut]="" (click)="isAsideShown.set(false)" (keydown)="noop()"></div>
 
   <aside class="width-px-250 h-100 fixed-top z-2" [@slideInOutFromLeft]="">
 

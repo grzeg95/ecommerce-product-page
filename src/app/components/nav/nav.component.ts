@@ -12,6 +12,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
+import {noop} from 'rxjs';
 import {fadeInOut} from '../../animations/fade-in-out';
 import {slideInOutFromLeft} from '../../animations/slide-in-out-from-left';
 import {HoverClassesDirective} from '../../directives/hover-class.directive';
@@ -150,4 +151,6 @@ export class NavComponent implements AfterViewInit {
       this.isAsideShown.set(false);
     }
   }
+
+  protected readonly noop = noop;
 }
