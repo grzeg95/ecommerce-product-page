@@ -48,8 +48,15 @@ export class NavComponent implements AfterViewInit {
 
   @HostListener('window:resize')
   private _handleWindowResize() {
-    this._updateSpacer();
-    this._updateNavWrapperWidth();
+
+    //
+    // Add time for browser features
+    //
+
+    setTimeout(() => {
+      this._updateSpacer();
+      this._updateNavWrapperWidth();
+    }, 100);
   }
 
   isAsideShown = signal<boolean>(false);
