@@ -30,7 +30,7 @@
 
     <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
 
-      <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)" (keydown)="handleCartKeydown($event)" tabindex="0">
+      <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)">
         <svg
           appSvg
           class="icon"
@@ -46,7 +46,7 @@
       </div>
 
       <div class="d-flex">
-        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png" alt="Avatar">
+        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png">
       </div>
 
     </div>
@@ -61,7 +61,7 @@
 
 @if (isAsideShown() && isOnMediumAndBellow()) {
 
-  <div class="fixed-top w-100 h-100 background__drop z-2" tabindex="0" [@fadeInOut]="" (click)="isAsideShown.set(false)" (keydown)="handleKeydownOnDrop($event)"></div>
+  <div class="fixed-top w-100 h-100 background__drop z-2" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
 
   <aside class="width-px-250 h-100 fixed-top z-2" [@slideInOutFromLeft]="">
 

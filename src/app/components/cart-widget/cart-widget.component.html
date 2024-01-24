@@ -12,7 +12,7 @@
 
       @for(productCart of productsCart(); track productCart) {
         <div class="d-flex gap-2 w-100 p-4 pb-0">
-          <img class="app-cart-widget__product-img d-block" [src]="productCart.image" alt="Product Image">
+          <img class="app-cart-widget__product-img d-block" [src]="productCart.image">
           <div class="d-flex flex-column justify-content-center overflow-hidden">
             <div class="app-cart-widget__product-name">{{ productCart.name }}</div>
             <div class="app-cart-widget__product-price">
