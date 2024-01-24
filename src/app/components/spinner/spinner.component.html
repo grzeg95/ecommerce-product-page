@@ -1,8 +1,11 @@
 <div
   role="button"
+  tabindex="0"
   class="app-spinner__button p-3 pointer-event disabled"
   [class.app-spinner__button--disabled]="parseInt(this.value) <= this.min"
   (click)="_onButtonClick($event, parseInt(this.value) - 1)"
+  (keydown)="_onButtonKeydown($event, parseInt(this.value) - 1)"
+  [attr.aria-label]="'Decrease Products'"
 >
   <svg
     appSvg
@@ -14,9 +17,12 @@
 
 <div
   role="button"
+  tabindex="0"
   class="app-spinner__button p-3 pointer-event"
   [class.app-spinner__button--disabled]="parseInt(this.value) >= this.max"
   (click)="_onButtonClick($event, parseInt(this.value) + 1)"
+  (keydown)="_onButtonKeydown($event, parseInt(this.value) + 1)"
+  [attr.aria-label]="'Increase Products'"
 >
   <svg
     appSvg

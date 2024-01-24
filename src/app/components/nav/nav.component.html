@@ -5,16 +5,25 @@
     <div class="d-flex align-items-center" [ngClass]="isOnMediumAndBellow() ? 'gap-3' : 'gap-5'">
 
       @if (isOnMediumAndBellow()) {
-        <svg
-          appSvg
-          name="icon-menu"
-          class="icon"
-          appHoverClasses="icon--active"
+
+        <div
+          class="d-flex"
+          tabindex="0"
           (click)="isAsideShown.set(true)"
-        ></svg>
+          (keydown)="handleAsideMenuKeydown($event)"
+          [attr.arial-label]="'Close mobile menu'"
+        >
+          <svg
+            appSvg
+            name="icon-menu"
+            class="icon"
+            appHoverClasses="icon--active"
+          ></svg>
+        </div>
+
       }
 
-      <a aria-label="Home" routerLink="/" class="app-nav__logo">
+      <a aria-label="Home" routerLink="/" class="line-height-0">
         <svg appSvg name="logo"></svg>
       </a>
 
@@ -30,13 +39,19 @@
 
     <div class="d-flex w-auto gap-2 align-items-center" [class.gap-4]="!isOnMediumAndBellow()">
 
-      <div class="d-flex position-relative" (click)="openCartWidget(cartWidgetConnector)">
+      <div
+        class="d-flex position-relative"
+        tabindex="0"
+        (click)="openCartWidget(cartWidgetConnector)"
+        (keydown)="handleCartKeydown($event)"
+        [attr.aria-label]="'Cart Icon'"
+      >
         <svg
           appSvg
+          name="icon-cart"
           class="icon"
           appHoverClasses="icon--active"
           [class.icon--active-2]="cartItemsLength() || isCartWidgetShown()"
-          name="icon-cart"
           [class.icon__big]="!isOnMediumAndBellow()"
         />
 
@@ -46,7 +61,7 @@
       </div>
 
       <div class="d-flex">
-        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png">
+        <img class="avatar avatar-header" [class.avatar--big]="!isOnMediumAndBellow()" src="/assets/images/image-avatar.png" alt="Avatar">
       </div>
 
     </div>
@@ -61,25 +76,31 @@
 
 @if (isAsideShown() && isOnMediumAndBellow()) {
 
-  <div class="fixed-top w-100 h-100 background__drop z-2" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
+  <div class="fixed-top w-100 h-100 background__drop z-2" tabindex="-1" [@fadeInOut]="" (click)="isAsideShown.set(false)"></div>
 
   <aside class="width-px-250 h-100 fixed-top z-2" [@slideInOutFromLeft]="">
 
     <div class="p-4 m-0 h-100 background">
 
-      <div class="d-flex flex-column gap-5">
+      <div class="d-flex flex-column align-items-start gap-5">
 
-        <svg
-          appSvg
-          class="icon"
-          appHoverClasses="icon--active"
-          name="icon-close"
-          arialLabel="Close mobile menu"
-          [class.icon__big]="!isOnMediumAndBellow()"
+        <div
+          class="d-flex"
+          tabindex="0"
           (click)="isAsideShown.set(false)"
-        />
+          (keydown)="handleKeydownCloseAside($event)"
+          [attr.aria-label]="'Icon Close'"
+        >
+          <svg
+            appSvg
+            name="icon-close"
+            class="icon"
+            appHoverClasses="icon--active"
+            [class.icon__big]="!isOnMediumAndBellow()"
+          />
+        </div>
 
-        <div class="d-flex flex-column gap-4">
+        <div class="d-flex flex-column align-items-start gap-4">
           @for (link of links; track link) {
             <a routerLink="/" class="app-nav__aside-link" [routerLink]="link.link" (click)="isAsideShown.set(false)">{{ link.title }}</a>
           }

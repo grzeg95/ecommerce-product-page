@@ -11,11 +11,25 @@
   </swiper-container>
 
   @if (images.normal.length > 1 && isOnSmallAndBellow()) {
-    <div role="button" class="swiper-button-prev" [class.swiper-button-disabled]="_activeIndex() === 0" (click)="appSwiper.swiper.slidePrev()">
+    <div
+      role="button"
+      class="swiper-button-prev"
+      [attr.tabindex]="_activeIndex() === 0 ? -1 : 0"
+      [class.swiper-button-disabled]="_activeIndex() === 0"
+      (click)="appSwiper.swiper.slidePrev()"
+      (keydown)="handleKeydownOnSwiperButtonPrev($event)"
+    >
       <svg appSvg name="icon-previous"></svg>
     </div>
 
-    <div role="button" class="swiper-button-next" [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1" (click)="appSwiper.swiper.slideNext()">
+    <div
+      role="button"
+      class="swiper-button-next"
+      [attr.tabindex]="_activeIndex() === images.normal.length - 1 ? -1 : 0"
+      [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1"
+      (click)="appSwiper.swiper.slideNext()"
+      (keydown)="handleKeydownOnSwiperButtonNext($event)"
+    >
       <svg appSvg name="icon-next"></svg>
     </div>
   }

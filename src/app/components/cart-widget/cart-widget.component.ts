@@ -35,7 +35,13 @@ export class CartWidgetComponent {
     this._cartService.closeWidget();
   }
 
-  async removeProduct(id: number) {
+  removeProduct(id: number) {
     this._cartService.removeProduct(id);
+  }
+
+  handleKeydownRemoveProduct($event: KeyboardEvent, id: number) {
+    if ($event.code === 'Enter') {
+      this.removeProduct(id);
+    }
   }
 }
