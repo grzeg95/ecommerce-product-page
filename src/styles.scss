@@ -337,6 +337,10 @@ svg {
   }
 }
 
+.cdk-dialog-container {
+  outline: none !important;
+}
+
 $theme-orange: (
   'primary': hsl(26, 100%, 55%),
   'secondary': hsl(25, 100%, 94%),
