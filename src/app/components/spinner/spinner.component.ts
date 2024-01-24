@@ -69,4 +69,10 @@ export class SpinnerComponent implements ControlValueAccessor {
   }
 
   protected readonly parseInt = parseInt;
+
+  _onButtonKeydown($event: KeyboardEvent, value: number) {
+    if ($event.code === 'Enter' || $event.code === 'Space') {
+      this._onButtonClick($event, value);
+    }
+  }
 }

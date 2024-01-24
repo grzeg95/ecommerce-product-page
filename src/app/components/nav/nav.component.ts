@@ -45,6 +45,7 @@ export class NavComponent implements AfterViewInit {
 
   @ViewChild('navWrapper') navWrapper?: ElementRef<HTMLElement>;
   @ViewChild('spacer') spacer?: ElementRef<HTMLElement>;
+  @ViewChild('cartWidgetConnector') cartWidgetConnector?: ElementRef<HTMLElement>;
 
   @HostListener('window:resize')
   private _handleWindowResize() {
@@ -120,6 +121,18 @@ export class NavComponent implements AfterViewInit {
 
     if (!this.isCartWidgetShown()) {
       this._cartService.openWidget(cartWidgetConnector);
+    }
+  }
+
+  handleKeydownOnDrop($event: KeyboardEvent) {
+    if ($event.code === 'Enter' || $event.code === 'Space') {
+      this.isAsideShown.set(false);
+    }
+  }
+
+  handleCartKeydown($event: KeyboardEvent) {
+    if ($event.code === 'Enter' || $event.code === 'Space') {
+      this.openCartWidget(this.cartWidgetConnector!.nativeElement!);
     }
   }
 }

@@ -95,4 +95,10 @@ export class ProductImageGalleryComponent {
     this._activeIndex.set(activeIndex);
     this.activeIndexChange.emit(activeIndex);
   }
+
+  handleKeydownOnSwiperButton($event: KeyboardEvent, callback: () => void) {
+    if ($event.code === 'Enter' || $event.code === 'Space') {
+      callback();
+    }
+  }
 }
