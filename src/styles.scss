@@ -92,7 +92,7 @@ hr {
 
 @mixin hr($theme) {
   hr {
-    background: map-get($theme, 'hr');
+    background: map-get($theme, 'color-accent');
   }
 }
 
