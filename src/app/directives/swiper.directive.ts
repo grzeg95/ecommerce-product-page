@@ -15,6 +15,7 @@ export class SwiperDirective implements AfterViewInit {
   @HostBinding('id') id = 'appSwiper_' + SwiperDirective._id++;
 
   @Input({required: true}) config!: SwiperOptions;
+  @Input() padding = 0;
 
   @Input() set hidden (hidden: boolean) {
     this._display = hidden ? 'none' : 'block';
@@ -35,5 +36,12 @@ export class SwiperDirective implements AfterViewInit {
     this._el.nativeElement.addEventListener('swiperslidechange', (evt) => {
       this.slideChange.emit((evt as CustomEvent).detail[0].activeIndex);
     });
+
+    const shadowRoot = this._el.nativeElement.shadowRoot;
+    const swiper = shadowRoot?.querySelector('.swiper') as HTMLElement;
+
+    swiper.style.padding = `${this.padding}px`;
+    swiper.style.width = `calc(100% - ${this.padding * 2}px)`;
   }
 }
+``

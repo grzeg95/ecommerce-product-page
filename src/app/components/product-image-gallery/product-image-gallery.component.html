@@ -36,7 +36,7 @@
 
 </div>
 
-<swiper-container class="mt-4" appSwiper #appSwiperThumbs [config]="swiperThumbsConfig" [hidden]="isOnSmallAndBellow()">
+<swiper-container class="mt-4" appSwiper #appSwiperThumbs [config]="swiperThumbsConfig" [padding]="2" [hidden]="isOnSmallAndBellow()">
   @for (image of images.thumb; track image; let i = $index) {
     <swiper-slide appSwiperSlide class="swiper-item-thumb__picture rounded-3" [class.swiper-item-thumb__picture--active]="appSwiper.swiper.activeIndex === i" (click)="appSwiper.swiper.slideTo(i);">
       <div class="h-100 rounded-2" [ngStyle]="{
