@@ -3,26 +3,26 @@
   .app-nav {
 
     &__wrapper {
-      background: map-get($theme, 'background');
+      background: map-get($theme, 'color-background');
     }
 
     &__link {
 
-      color: map-get($theme, 'inactive');
+      color: map-get($theme, 'color-secondary');
 
       &:hover {
 
-        color: map-get($theme, 'color');
+        color: map-get($theme, 'color-main');
 
         &::before {
-          background: map-get($theme, 'primary');
+          background: map-get($theme, 'color-primary');
         }
 
       }
     }
 
     &__aside-link {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
   }
 }

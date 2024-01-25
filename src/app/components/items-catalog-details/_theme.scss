@@ -3,28 +3,28 @@
   .app-items-catalog-details {
 
     .company-name {
-      color: map-get($theme, 'primary');
+      color: map-get($theme, 'color-primary');
     }
 
     .name {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
 
     .description {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
 
     .price {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
 
     .discount {
-      background-color: map-get($theme, 'secondary');
-      color: map-get($theme, 'primary');
+      background-color: map-get($theme, 'color-primary-light');
+      color: map-get($theme, 'color-primary');
     }
 
     .old-price {
-      color: map-get($theme, 'old');
+      color: map-get($theme, 'color-accent');
     }
   }
 }
