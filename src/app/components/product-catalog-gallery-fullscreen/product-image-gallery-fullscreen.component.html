@@ -1,21 +1,29 @@
 <div class="position-relative">
 
-  <swiper-container appSwiper #appSwiper [config]="swiperConfig" (slideChange)="handleSlideChange($event)">
+  <swiper-container
+    appSwiper
+    #appSwiper
+    [config]="swiperConfig"
+    (slideChange)="handleAppSwiperSlideChange($event)"
+  >
     @for (image of images.normal; track image) {
       <swiper-slide appSwiperSlide>
-        <div class="h-100 rounded-4" [ngStyle]="{
-              background: 'url(' + image +') no-repeat top center / contain'
-            }"></div>
+        <div
+          class="h-100 rounded-4"
+          [ngStyle]="{
+             background: 'url(' + image +') no-repeat top center / contain'
+           }"
+        ></div>
       </swiper-slide>
     }
   </swiper-container>
 
   @if (images.normal.length > 1) {
     <div
+      role="button"
       class="swiper-button-prev"
       [class.swiper-button-disabled]="_activeIndex() === 0"
       [tabindex]="_activeIndex() === 0 ? -1 : 0"
-      role="button"
       (click)="appSwiper.swiper.slidePrev()"
       (keydown)="handleKeydownOnSwiperButtonPrev($event)"
     >
@@ -23,10 +31,10 @@
     </div>
 
     <div
+      role="button"
       class="swiper-button-next"
       [class.swiper-button-disabled]="_activeIndex() === images.normal.length - 1"
       [tabindex]="_activeIndex() === images.normal.length - 1 ? -1 : 0"
-      role="button"
       (click)="appSwiper.swiper.slideNext()"
       (keydown)="handleKeydownOnSwiperButtonNext($event)"
     >
@@ -36,12 +44,25 @@
 
 </div>
 
-<swiper-container class="mt-4 ps-4 pe-4" appSwiper #appSwiperThumbs [config]="swiperThumbsConfig">
+<swiper-container
+  class="mt-4 ps-4 pe-4"
+  appSwiper
+  #appSwiperThumbs
+  [config]="swiperThumbsConfig"
+  [padding]="2"
+>
   @for (image of images.thumb; track image; let i = $index) {
-    <swiper-slide appSwiperSlide class="swiper-item-thumb__picture rounded-3" [class.swiper-item-thumb__picture--active]="appSwiper.swiper.activeIndex === i" (click)="appSwiper.swiper.slideTo(i);">
-      <div class="h-100 rounded-2" [ngStyle]="{
-              background: 'url(' + image +') no-repeat top center / contain'
-             }"></div>
+    <swiper-slide appSwiperSlide class="rounded-3">
+      <div
+        class="h-100 rounded-2 swiper-item-thumb__picture"
+        tabindex="0"
+        (click)="handleSwiperSlideThumbClick(i)"
+        (keydown)="handleSwiperSlideThumbKeydown($event, i)"
+        [class.swiper-item-thumb__picture--active]="this._activeIndex() === i"
+        [ngStyle]="{
+          background: 'url(' + image + ') no-repeat top center / contain'
+        }"
+      ></div>
     </swiper-slide>
   }
 </swiper-container>

@@ -16,7 +16,7 @@ import {BreakpointsService} from '../../services/breakpoints.service';
 import {ProductImageGalleryComponent} from '../product-image-gallery/product-image-gallery.component';
 
 @Component({
-  selector: 'app-product-catalog-gallery-fullscreen',
+  selector: 'app-product-image-gallery-fullscreen',
   standalone: true,
   imports: [
     SvgDirective,

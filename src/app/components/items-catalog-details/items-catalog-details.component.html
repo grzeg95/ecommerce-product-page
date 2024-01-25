@@ -1,7 +1,11 @@
 @if (product) {
 
   @if (isOnExtraSmallAndBellow()) {
-    <app-product-image-gallery [(activeIndex)]="galleryActiveIndex" [images]="product.images"/>
+    <app-product-image-gallery
+      [(activeIndex)]="galleryActiveIndex"
+      [(activeIndexThumb)]="galleryActiveIndexThumb"
+      [images]="product.images"
+    />
   }
 
   <div class="container mw">
@@ -9,7 +13,13 @@
 
       @if (!isOnExtraSmallAndBellow()) {
         <div class="col-md-6 col-lg-5">
-          <app-product-image-gallery #appProductImageGallery [(activeIndex)]="galleryActiveIndex" [images]="product.images" (clickNormal)="!isOnSmallAndBellow() && showFullscreenGallery()"/>
+          <app-product-image-gallery
+            #appProductImageGallery
+            [(activeIndex)]="galleryActiveIndex"
+            [(activeIndexThumb)]="galleryActiveIndexThumb"
+            [images]="product.images"
+            (clickNormal)="!isOnSmallAndBellow() && showFullscreenGallery()"
+          />
         </div>
       }
 

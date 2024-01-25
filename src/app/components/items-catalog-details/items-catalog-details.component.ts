@@ -75,6 +75,8 @@ export class ItemsCatalogDetailsComponent implements OnInit {
   });
 
   protected galleryActiveIndex = 0;
+  protected galleryActiveIndexThumb = 0;
+
   private itemsCatalogGalleryFullscreenComponentDialogRef?: DialogRef<unknown, ProductImageGalleryFullscreenComponent>;
 
   constructor(
@@ -114,6 +116,7 @@ export class ItemsCatalogDetailsComponent implements OnInit {
 
     componentInstance.images = this.product!.images;
     componentInstance.activeIndex = this.galleryActiveIndex;
+    componentInstance.activeIndexThumb = this.galleryActiveIndexThumb;
   }
 
   protected addProduct() {
