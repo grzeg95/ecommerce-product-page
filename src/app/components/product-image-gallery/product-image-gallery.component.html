@@ -52,6 +52,7 @@
   #appSwiperThumbs
   [config]="swiperThumbsConfig"
   [padding]="2"
+  [hidden]="isOnSmallAndBellow()"
 >
   @for (image of images.thumb; track image; let i = $index) {
     <swiper-slide appSwiperSlide class="rounded-3">
