@@ -141,7 +141,7 @@ hr {
 
   background: white;
 
-  &__drop {
+  &-backdrop {
     background: rgba(0, 0, 0, 0.75);
   }
 }
@@ -151,7 +151,7 @@ hr {
 
     background: map-get($theme, 'color-background');
 
-    &__drop {
+    &-backdrop {
       background: map-get($theme, 'color-background-drop');
     }
   }
@@ -341,6 +341,19 @@ svg {
   outline: none !important;
 }
 
+.cdk-global-scrollblock {
+  position: static;
+  width: auto;
+  overflow-y: hidden;
+}
+
+@mixin cdk-overlay-dark-backdrop($theme) {
+
+  .cdk-overlay-dark-backdrop {
+    background: map-get($theme, 'color-background-drop');
+  }
+}
+
 $theme-orange: (
   'color-primary': hsl(26, 100%, 55%),
   'color-primary-light': hsl(25, 100%, 94%),
@@ -349,7 +362,7 @@ $theme-orange: (
   'color-accent': hsl(220, 14%, 75%),
   'color-input': hsl(223, 64%, 98%),
   'color-background': hsl(0, 0%, 100%),
-  'color-background-drop':  opacify(hsl(0, 0%, 0%), 0.75)
+  'color-background-drop':  transparentize(hsl(0, 0%, 0%), 0.35)
 );
 
 .orange {
@@ -364,4 +377,6 @@ $theme-orange: (
   @include items-catalog-details($theme-orange);
   @include button-flat($theme-orange);
   @include cart-widget($theme-orange);
+  @include background($theme-orange);
+  @include cdk-overlay-dark-backdrop($theme-orange);
 }
