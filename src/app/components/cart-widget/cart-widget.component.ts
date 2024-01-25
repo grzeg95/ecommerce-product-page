@@ -18,7 +18,7 @@ import {times} from '../../utils/big-number';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    class: 'app-cart-widget shadow-lg rounded m-2'
+    class: 'app-cart-widget shadow rounded m-2'
   }
 })
 export class CartWidgetComponent {

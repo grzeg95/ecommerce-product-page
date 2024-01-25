@@ -43,8 +43,8 @@ body {
 }
 
 @mixin container($theme) {
-  background: map-get($theme, 'background');
-  color: map-get($theme, 'color');
+  background: map-get($theme, 'color-background');
+  color: map-get($theme, 'color-main');
 }
 
 .icon {
@@ -73,12 +73,12 @@ body {
   .icon {
 
     path {
-      fill: map-get($theme, 'inactive') !important;
+      fill: map-get($theme, 'color-secondary') !important;
     }
 
     &--active, &--active-2 {
       path {
-        fill: map-get($theme, 'color') !important;
+        fill: map-get($theme, 'color-main') !important;
       }
     }
   }
@@ -92,7 +92,7 @@ hr {
 
 @mixin hr($theme) {
   hr {
-    background: map-get($theme, 'hr');
+    background: map-get($theme, 'color-accent');
   }
 }
 
@@ -127,7 +127,7 @@ hr {
     &-header {
 
       &:hover {
-        border: solid 2px map-get($theme, 'primary');
+        border: solid 2px map-get($theme, 'color-primary');
       }
     }
   }
@@ -141,7 +141,7 @@ hr {
 
   background: white;
 
-  &__drop {
+  &-backdrop {
     background: rgba(0, 0, 0, 0.75);
   }
 }
@@ -149,10 +149,10 @@ hr {
 @mixin background($theme) {
   .background {
 
-    background: map-get($theme, 'background');
+    background: map-get($theme, 'color-background');
 
-    &__drop {
-      background: map-get($theme, 'background-drop');
+    &-backdrop {
+      background: map-get($theme, 'color-background-drop');
     }
   }
 }
@@ -233,7 +233,7 @@ svg {
 
   .swiper-button-next,
   .swiper-button-prev {
-    background: map-get($theme, 'background');
+    background: map-get($theme, 'color-background');
   }
 
   .swiper-item-thumb__picture {
@@ -242,16 +242,16 @@ svg {
 
     &:hover {
       &::before {
-        background: transparentize(map-get($theme, 'background'), 0.33);
+        background: transparentize(map-get($theme, 'color-background'), 0.33);
       }
     }
 
     &--active {
 
-      border: solid 2px map-get($theme, 'primary');
+      border: solid 2px map-get($theme, 'color-primary');
 
       &::before {
-        background: transparentize(map-get($theme, 'background'), 0.33);
+        background: transparentize(map-get($theme, 'color-background'), 0.33);
       }
     }
   }
@@ -285,8 +285,8 @@ svg {
 @mixin badge($theme) {
 
   .badge {
-    background: map-get($theme, 'primary');
-    color: map-get($theme, 'background');
+    background: map-get($theme, 'color-primary');
+    color: map-get($theme, 'color-background');
   }
 }
 
@@ -327,12 +327,12 @@ svg {
 
   .app-button-flat {
 
-    color: map-get($theme, 'background');
-    background: map-get($theme, 'primary');
+    color: map-get($theme, 'color-background');
+    background: map-get($theme, 'color-primary');
 
     &:hover {
-      color: map-get($theme, 'background');
-      background: transparentize(map-get($theme, 'primary'), 0.4);
+      color: map-get($theme, 'color-background');
+      background: transparentize(map-get($theme, 'color-primary'), 0.4);
     }
   }
 }
@@ -341,16 +341,28 @@ svg {
   outline: none !important;
 }
 
+.cdk-global-scrollblock {
+  position: static;
+  width: auto;
+  overflow-y: hidden;
+}
+
+@mixin cdk-overlay-dark-backdrop($theme) {
+
+  .cdk-overlay-dark-backdrop {
+    background: map-get($theme, 'color-background-drop');
+  }
+}
+
 $theme-orange: (
-  'primary': hsl(26, 100%, 55%),
-  'secondary': hsl(25, 100%, 94%),
-  'color': hsl(220, 13%, 13%),
-  'inactive': hsl(219, 9%, 45%),
-  'old': hsl(220, 14%, 75%),
-  'hr': #E8E7EC,
-  'accent': hsl(223, 64%, 98%),
-  'background': hsl(0, 0%, 100%),
-  'background-drop':  opacify(hsl(0, 0%, 0%), 0.75)
+  'color-primary': hsl(26, 100%, 55%),
+  'color-primary-light': hsl(25, 100%, 94%),
+  'color-main': hsl(220, 13%, 13%),
+  'color-secondary': hsl(219, 9%, 45%),
+  'color-accent': hsl(220, 14%, 75%),
+  'color-input': hsl(223, 64%, 98%),
+  'color-background': hsl(0, 0%, 100%),
+  'color-background-drop':  transparentize(hsl(0, 0%, 0%), 0.35)
 );
 
 .orange {
@@ -365,4 +377,6 @@ $theme-orange: (
   @include items-catalog-details($theme-orange);
   @include button-flat($theme-orange);
   @include cart-widget($theme-orange);
+  @include background($theme-orange);
+  @include cdk-overlay-dark-backdrop($theme-orange);
 }

@@ -2,26 +2,26 @@
 
   .app-cart-widget {
 
-    background: map-get($theme, 'background');
+    background: map-get($theme, 'color-background');
 
     &__cart-title {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
 
     &__cart-empty {
-      color: map-get($theme, 'inactive');
+      color: map-get($theme, 'color-secondary');
     }
 
     &__product-name {
-      color: map-get($theme, 'inactive');
+      color: map-get($theme, 'color-secondary');
     }
 
     &__price-calc-left {
-      color: map-get($theme, 'inactive');
+      color: map-get($theme, 'color-secondary');
     }
 
     &__price-calc-right {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
   }
 }

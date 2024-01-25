@@ -2,12 +2,12 @@
 
   .app-spinner {
 
-    background: map-get($theme, 'accent');
+    background: map-get($theme, 'color-input');
 
     &__button {
 
       path {
-        fill: map-get($theme, 'primary') !important;
+        fill: map-get($theme, 'color-primary') !important;
       }
 
       &--disabled {
@@ -15,13 +15,13 @@
         pointer-events: none;
 
         path {
-          fill: transparentize(map-get($theme, 'primary'), 0.6) !important;
+          fill: transparentize(map-get($theme, 'color-primary'), 0.6) !important;
         }
       }
     }
 
     &__value {
-      color: map-get($theme, 'color');
+      color: map-get($theme, 'color-main');
     }
   }
 }
