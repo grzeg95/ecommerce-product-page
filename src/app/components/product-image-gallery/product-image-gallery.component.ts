@@ -134,7 +134,7 @@ export class ProductImageGalleryComponent {
         this.activeIndexThumb = newSwiperThumbsActiveIndex;
         this.activeIndexThumbChange.emit(newSwiperThumbsActiveIndex);
       }
-    }, {allowSignalWrites: true});
+    });
   }
 
   handleKeydownOnSwiperButtonPrev($event: KeyboardEvent) {
@@ -150,6 +150,12 @@ export class ProductImageGalleryComponent {
   }
 
   handleAppSwiperSlideChange(index: number) {
+
+    // first move on effect
+    if (this._activeIndex() === index) {
+      return;
+    }
+
     this._activeIndex.set(index);
     this.activeIndexChange.emit(index);
   }

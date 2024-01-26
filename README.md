@@ -42,15 +42,15 @@ Users should be able to:
 - Angular
 - Bootstrap
 - Swiper
+- Firebase hosting:github 
 
 ### What I learned
 
-- Run build before merge pull request
-- Swiper
-- Bootstrap Flex, Fonts, Spacing
+- Angular Animations, Signals
 - DOMPurify
-- Storing SVGs before page is loaded
-- Angular Animations
+- Caching SVGs
+- Swiper
+- Bootstrap Flex, Fonts, Spacing, Shadow
 
 ## Author
 
